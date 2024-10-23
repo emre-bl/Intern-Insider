@@ -17,5 +17,3 @@ def connect_to_db(collection_name = "reviews"):
     except Exception as e:
         print(f"Error: {e}")
         return None
-    
-connect_to_db()

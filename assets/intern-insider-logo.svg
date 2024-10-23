@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <!-- Background circle for 'i' dot -->
+  <circle cx="85" cy="60" r="25" fill="#2D5BFF"/>
+  
+  <!-- Magnifying glass -->
+  <circle cx="85" cy="60" r="15" fill="white"/>
+  <rect x="95" y="70" width="25" height="8" rx="4" transform="rotate(45, 95, 70)" fill="white"/>
+  
+  <!-- Text "Intern" -->
+  <text x="140" y="120" font-family="Arial" font-weight="bold" font-size="90" fill="#1A1A1A">
+    Intern
+  </text>
+  
+  <!-- Hyphen -->
+  <text x="380" y="120" font-family="Arial" font-weight="bold" font-size="90" fill="#2D5BFF">
+    -
+  </text>
+  
+  <!-- Text "Insider" -->
+  <text x="420" y="120" font-family="Arial" font-weight="bold" font-size="90" fill="#2D5BFF">
+    Insider
+  </text>
+  
+  <!-- Tagline -->
+  <text x="140" y="160" font-family="Arial" font-size="24" fill="#666666">
+    Discover Your Perfect Internship
+  </text>
+</svg>
