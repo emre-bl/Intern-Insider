@@ -112,6 +112,10 @@ def render_navbar():
             st.session_state.page = "admin_login"
             st.experimental_rerun()
 
+def render_logo():
+    """Render the logo at the top of the app"""
+    st.image("assets/intern-insider-logo.png")
+
 def render_hero_section():
     """Render hero section"""
     st.markdown(f"""
@@ -148,7 +152,7 @@ def render_popular_reviews():
     """Render popular reviews section"""
     st.markdown(f"### {get_text('popular_reviews')}")
     
-    # Sample reviews data - In production, this would come from your database
+    # Sample reviews data - In production, Database'den çekilecek
     sample_reviews = [
         {
             "company": "Tech Corp",
@@ -188,6 +192,8 @@ def main():
     init_session_state()
     
     apply_custom_css()
+
+    render_logo()
     render_navbar()
     render_hero_section()
     render_quick_filter()
