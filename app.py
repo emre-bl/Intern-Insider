@@ -10,6 +10,7 @@ TRANSLATIONS = {
         "nav_companies": "Companies",
         "nav_reviews": "Reviews",
         "nav_admin": "Admin Login",
+        "nav_logout": "Logout",
         "hero_title": "Find Your Perfect Internship",
         "hero_subtitle": "Read real experiences from former interns and make informed decisions about your future internship.",
         "filter_title": "Quick Search",
@@ -24,6 +25,7 @@ TRANSLATIONS = {
         "nav_companies": "Şirketler",
         "nav_reviews": "Değerlendirmeler",
         "nav_admin": "Admin Girişi",
+        "nav_logout": "Çıkış Yap",
         "hero_title": "Hayalindeki Stajı Bul",
         "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku ve gelecekteki stajın hakkında bilinçli kararlar al.",
         "filter_title": "Hızlı Arama",
@@ -39,6 +41,8 @@ def init_session_state():
     """Initialize session state variables"""
     if 'language' not in st.session_state:
         st.session_state.language = 'tr'
+    if 'is_admin' not in st.session_state:
+        st.session_state.is_admin = False  # Varsayılan olarak admin giriş yapılmamış
 
 def get_text(key: str) -> str:
     """Get translated text based on current language"""
@@ -93,24 +97,31 @@ def render_navbar():
         st.image("assets/intern-insider-compact-logo.svg", width=100)
     
     with col2:
-        st.button(get_text("nav_home"))
+        st.button(get_text("nav_home"), key="home_btn")
     
     with col3:
-        st.button(get_text("nav_companies"))
+        st.button(get_text("nav_companies"), key="companies_btn")
     
     with col4:
-        st.button(get_text("nav_reviews"))
+        st.button(get_text("nav_reviews"), key="reviews_btn")
     
     with col5:
-        # Language toggle
-        if st.button("🌐 TR/EN"):
+        # Dil değiştirme
+        if st.button("🌐 TR/EN", key="lang_toggle"):
             st.session_state.language = 'en' if st.session_state.language == 'tr' else 'tr'
             st.experimental_rerun()
     
     with col6:
-        if st.button(get_text("nav_admin")):
-            st.session_state.page = "admin_login"
-            st.experimental_rerun()
+        # Eğer admin giriş yaptıysa "Logout" butonu, değilse "Admin Girişi" butonu göster
+        if st.session_state.get("is_admin"):
+            if st.button(get_text("nav_logout"), key="logout_btn"):
+                st.session_state.is_admin = False  # Admin çıkışı
+                st.experimental_rerun()
+        else:
+            if st.button(get_text("nav_admin"), key="admin_btn"):
+                st.session_state.page = "admin_login"
+                st.experimental_rerun()
+
 
 def render_logo():
     """Render the logo at the top of the app"""
@@ -182,22 +193,29 @@ def render_popular_reviews():
             """, unsafe_allow_html=True)
 
 def main():
-    """Main function to render the homepage"""
+    """Main function to render the homepage or admin login based on session state"""
     st.set_page_config(
         page_title="Intern Insider",
         page_icon="👩‍💻",
         layout="wide"
     )
     
-    init_session_state()
-    
-    apply_custom_css()
+    # Ana sayfa veya admin girişine göre yönlendirme
+    if "page" not in st.session_state:
+        st.session_state["page"] = "home"  # Varsayılan sayfa
 
-    render_logo()
-    render_navbar()
-    render_hero_section()
-    render_quick_filter()
-    render_popular_reviews()
+    if st.session_state["page"] == "admin_login":
+        from admin_login import admin_login
+        admin_login()  # Admin giriş sayfasını çağırır
+    else:
+        # Ana sayfayı render eder
+        init_session_state()
+        apply_custom_css()
+        render_logo()
+        render_navbar()
+        render_hero_section()
+        render_quick_filter()
+        render_popular_reviews()
 
 
 if __name__ == "__main__":
