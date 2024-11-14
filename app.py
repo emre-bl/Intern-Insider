@@ -11,6 +11,7 @@ TRANSLATIONS = {
         "nav_reviews": "Reviews",
         "nav_admin": "Admin Login",
         "nav_logout": "Logout",
+        "submit_review": "Submit Review",
         "hero_title": "Find Your Perfect Internship",
         "hero_subtitle": "Read real experiences from former interns and make informed decisions about your future internship.",
         "filter_title": "Quick Search",
@@ -26,6 +27,7 @@ TRANSLATIONS = {
         "nav_reviews": "Değerlendirmeler",
         "nav_admin": "Admin Girişi",
         "nav_logout": "Çıkış Yap",
+        "submit_review": "Şirket Değerlendir",
         "hero_title": "Hayalindeki Stajı Bul",
         "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku ve gelecekteki stajın hakkında bilinçli kararlar al.",
         "filter_title": "Hızlı Arama",
@@ -89,11 +91,10 @@ def apply_custom_css():
     """, unsafe_allow_html=True)
 
 def render_navbar():
-    """Render navigation bar"""
-    col1, col2, col3, col4, col5, col6 = st.columns([2, 1, 1, 1, 1, 1])
+    # Sütun genişliklerini artırdık
+    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([1.5, 1, 1, 1, 1, 1, 1, 1.5])
     
     with col1:
-        # Kompakt logo için
         st.image("assets/intern-insider-compact-logo.svg", width=100)
     
     with col2:
@@ -104,18 +105,24 @@ def render_navbar():
     
     with col4:
         st.button(get_text("nav_reviews"), key="reviews_btn")
-    
+
+    # Şirket Değerlendir butonu
     with col5:
-        # Dil değiştirme
+        if st.button(get_text("submit_review"), key="submit_review_btn"):
+            st.session_state.page = "submit_review"
+            st.experimental_rerun()
+    
+    # Dil değiştirme
+    with col6:
         if st.button("🌐 TR/EN", key="lang_toggle"):
             st.session_state.language = 'en' if st.session_state.language == 'tr' else 'tr'
             st.experimental_rerun()
-    
-    with col6:
-        # Eğer admin giriş yaptıysa "Logout" butonu, değilse "Admin Girişi" butonu göster
+
+    # Admin girişi/çıkış işlemleri
+    with col7:
         if st.session_state.get("is_admin"):
             if st.button(get_text("nav_logout"), key="logout_btn"):
-                st.session_state.is_admin = False  # Admin çıkışı
+                st.session_state.is_admin = False
                 st.experimental_rerun()
         else:
             if st.button(get_text("nav_admin"), key="admin_btn"):
@@ -193,22 +200,22 @@ def render_popular_reviews():
             """, unsafe_allow_html=True)
 
 def main():
-    """Main function to render the homepage or admin login based on session state"""
     st.set_page_config(
         page_title="Intern Insider",
         page_icon="👩‍💻",
         layout="wide"
     )
-    
-    # Ana sayfa veya admin girişine göre yönlendirme
+
     if "page" not in st.session_state:
-        st.session_state["page"] = "home"  # Varsayılan sayfa
+        st.session_state["page"] = "home"
 
     if st.session_state["page"] == "admin_login":
         from admin_login import admin_login
-        admin_login()  # Admin giriş sayfasını çağırır
+        admin_login()
+    elif st.session_state["page"] == "submit_review":
+        from submit_review_page import submit_review
+        submit_review()
     else:
-        # Ana sayfayı render eder
         init_session_state()
         apply_custom_css()
         render_logo()
@@ -216,7 +223,6 @@ def main():
         render_hero_section()
         render_quick_filter()
         render_popular_reviews()
-
 
 if __name__ == "__main__":
     main()
