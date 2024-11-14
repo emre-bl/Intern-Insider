@@ -6,7 +6,6 @@ from datetime import datetime
 # Translations dictionary
 TRANSLATIONS = {
     "en": {
-        "nav_home": "Home",
         "nav_companies": "Companies",
         "nav_reviews": "Reviews",
         "nav_admin": "Admin Login",
@@ -22,7 +21,6 @@ TRANSLATIONS = {
         "search_button": "Search",
     },
     "tr": {
-        "nav_home": "Ana Sayfa",
         "nav_companies": "Şirketler",
         "nav_reviews": "Değerlendirmeler",
         "nav_admin": "Admin Girişi",
@@ -91,35 +89,28 @@ def apply_custom_css():
     """, unsafe_allow_html=True)
 
 def render_navbar():
-    # Sütun genişliklerini artırdık
-    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([1.5, 1, 1, 1, 1, 1, 1, 1.5])
+    col1, col2, col3, col4, col5 = st.columns([2, 2, 2, 2, 2])
     
     with col1:
         st.image("assets/intern-insider-compact-logo.svg", width=100)
     
     with col2:
-        st.button(get_text("nav_home"), key="home_btn")
-    
-    with col3:
-        st.button(get_text("nav_companies"), key="companies_btn")
-    
-    with col4:
         st.button(get_text("nav_reviews"), key="reviews_btn")
 
     # Şirket Değerlendir butonu
-    with col5:
+    with col3:
         if st.button(get_text("submit_review"), key="submit_review_btn"):
             st.session_state.page = "submit_review"
             st.experimental_rerun()
     
     # Dil değiştirme
-    with col6:
+    with col4:
         if st.button("🌐 TR/EN", key="lang_toggle"):
             st.session_state.language = 'en' if st.session_state.language == 'tr' else 'tr'
             st.experimental_rerun()
 
     # Admin girişi/çıkış işlemleri
-    with col7:
+    with col5:
         if st.session_state.get("is_admin"):
             if st.button(get_text("nav_logout"), key="logout_btn"):
                 st.session_state.is_admin = False

@@ -44,7 +44,6 @@ lang_dict = {
     }
 }
 
-# Dil kontrolü ve geçiş fonksiyonu
 def switch_language():
     current_lang = st.session_state.get('language', 'en')
     new_lang = 'tr' if current_lang == 'en' else 'en'
@@ -52,7 +51,6 @@ def switch_language():
     st.session_state['language_changed'] = True  # Dil değişti flag'ini ekleyin
 
 def submit_review():
-    # Sayfa tipi kontrolü
     if 'page' not in st.session_state:
         st.session_state['page'] = 'home'  # Varsayılan sayfa
     
@@ -87,22 +85,16 @@ def submit_review():
         
         st.markdown(f"<h1>{text['submit_review']}</h1>", unsafe_allow_html=True)
 
-        # Şirket adı seçimi (çoktan seçmeli)
         company_name = st.selectbox(text["company_name"], ["ABC Corp", "XYZ Ltd", "Tech Solutions", "Innovative Labs", "Global Tech"])
 
-        # Puanlama (1-5 yıldız)
         rating = st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3)
         
-        # Detaylı değerlendirme metni
         review_text = st.text_area(text["detailed_review"], placeholder="Share your internship experience...")
 
-        # Aylık maaş bilgisi (opsiyonel)
         salary = st.text_input(text["salary"], placeholder="Monthly salary")
 
-        # Departman seçimi (çoktan seçmeli)
         department = st.selectbox(text["department"], ["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"])
 
-        # Staj pozisyonu
         internship_role = st.text_input(text["internship_role"], placeholder="e.g., Software Developer Intern")
 
         # Proje kalitesi puanı (1-10 arası slider)
