@@ -7,6 +7,17 @@ config.read('config.ini')
 
 connection_string = config.get('481-db','connection_string')
 
+client = MongoClient(connection_string)
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
+print("-----------------")  
+
+
 
 def connect_to_db():
     try:
@@ -16,19 +27,6 @@ def connect_to_db():
     except Exception as e:
         print(f"Error: {e}")
         return None
-    
-
-def list_collections():
-    db = connect_to_db()
-    if db:
-        collections = db.list_collection_names()
-        print("Collections in the database:")
-        for collection in collections:
-            print(collection)
-
-# Fonksiyonu çağırarak koleksiyon isimlerini yazdıralım
-list_collections()
-
 
 def connect_to_collection(collection_name):
     try:
@@ -44,25 +42,17 @@ def connect_to_collection(collection_name):
         print(f"Error: {e}")
         return None
 
-    
-def create_review(data):
-    """Create a new review"""
-    collection = connect_to_collection("reviews")
-    result = collection.insert_one(data)
-    return result.inserted_id
-
-def read_reviews(filters={}):
-    """Read reviews based on filters"""
-    collection = connect_to_collection("reviews")
-    reviews = collection.find(filters)
-    return list(reviews)
-
-def delete_review(review_id):
-    """Delete a review"""
-    collection = connect_to_collection("reviews")
-    result = collection.delete_one({"_id": review_id})
-    return result.deleted_count
-
+def create_review(review):
+    try:
+        collection = connect_to_collection('reviews')
+        if collection is None:
+            raise Exception("Collection bağlantısı kurulamadı.")
+        
+        result = collection.insert_one(review)
+        return result.inserted_id
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 sample_reviews = [
     {
@@ -111,6 +101,8 @@ sample_reviews = [
         "like_count": 30
     }
 ]
+
+
 
 for review in sample_reviews:
     review_id = create_review(review)
