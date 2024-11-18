@@ -114,13 +114,13 @@ def submit_review():
                 "department": department,
                 "internship_role": internship_role,
                 "project_rating": project_quality,
-                "transportation_info": text["transportation"] if transportation else text["not_provided"],
-                "remote_work_option": text["remote_work"] if remote_work else text["not_provided"],
-                "meal_card": text["meal_allowance"] if meal_allowance else text["not_provided"],
+                "transportation_info": transportation,
+                "remote_work_option": remote_work,
+                "meal_card": meal_allowance,
                 "technologies_used": technologies_used.split(", "),  # Virgülle ayrılmış teknolojiler listesi
                 "feedback_date": datetime.now().strftime("%d/%m/%Y"),
-                "like_count": 0,  # Varsayılan beğeni sayısı 0
-                "admin_approved": False  # Varsayılan olarak admin onayı False
+                "like_count": 0,  
+                "admin_approved": False 
             }
 
             # Veriyi veritabanına ekleme
