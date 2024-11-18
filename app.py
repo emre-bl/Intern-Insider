@@ -1,15 +1,14 @@
 import streamlit as st
-from typing import Dict
 import pandas as pd
 from datetime import datetime
 
-# Translations dictionary
 TRANSLATIONS = {
     "en": {
         "nav_companies": "Companies",
         "nav_reviews": "Reviews",
         "nav_admin": "Admin Login",
         "nav_logout": "Logout",
+        "nav_admin_panel": "Admin Panel",
         "submit_review": "Submit Review",
         "hero_title": "Find Your Perfect Internship",
         "hero_subtitle": "Read real experiences from former interns and make informed decisions about your future internship.",
@@ -25,6 +24,7 @@ TRANSLATIONS = {
         "nav_reviews": "Değerlendirmeler",
         "nav_admin": "Admin Girişi",
         "nav_logout": "Çıkış Yap",
+        "nav_admin_panel": "Admin Panel",
         "submit_review": "Şirket Değerlendir",
         "hero_title": "Hayalindeki Stajı Bul",
         "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku ve gelecekteki stajın hakkında bilinçli kararlar al.",
@@ -89,7 +89,7 @@ def apply_custom_css():
     """, unsafe_allow_html=True)
 
 def render_navbar():
-    col1, col2, col3, col4, col5 = st.columns([2, 2, 2, 2, 2])
+    col1, col2, col3, col4, col5, col6 = st.columns([2, 2, 2, 2, 2, 2])
     
     with col1:
         st.image("assets/intern-insider-compact-logo.svg", width=100)
@@ -118,6 +118,12 @@ def render_navbar():
         else:
             if st.button(get_text("nav_admin"), key="admin_btn"):
                 st.session_state.page = "admin_login"
+                st.experimental_rerun()
+    
+    with col6:
+        if st.session_state.get("is_admin"):
+            if st.button(get_text("nav_admin_panel"), key="admin_panel_btn"):
+                st.session_state.page = "admin_panel"
                 st.experimental_rerun()
 
 
@@ -206,6 +212,9 @@ def main():
     elif st.session_state["page"] == "submit_review":
         from submit_review_page import submit_review
         submit_review()
+    elif st.session_state["page"] == "admin_panel":
+        from admin_panel import admin_panel
+        admin_panel()
     else:
         init_session_state()
         apply_custom_css()

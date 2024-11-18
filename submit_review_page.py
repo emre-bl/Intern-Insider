@@ -119,7 +119,8 @@ def submit_review():
                 "meal_card": text["meal_allowance"] if meal_allowance else text["not_provided"],
                 "technologies_used": technologies_used.split(", "),  # Virgülle ayrılmış teknolojiler listesi
                 "feedback_date": datetime.now().strftime("%d/%m/%Y"),
-                "like_count": 0  # Varsayılan beğeni sayısı 0
+                "like_count": 0,  # Varsayılan beğeni sayısı 0
+                "admin_approved": False  # Varsayılan olarak admin onayı False
             }
 
             # Veriyi veritabanına ekleme
