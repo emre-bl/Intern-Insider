@@ -1,11 +1,10 @@
 from pymongo import MongoClient
 from configparser import ConfigParser
-from datetime import datetime
 
 config = ConfigParser()
 config.read('backend/config.ini')
 
-connection_string = config.get('481-db','connection_string')
+connection_string = config.get('481-db', 'connection_string')
 
 def connect_to_db():
     try:
@@ -42,3 +41,15 @@ def create_review(review):
         print(f"Error: {e}")
         return None
 
+def get_companies():
+    try:
+        collection = connect_to_collection('company')
+        if collection is None:
+            raise Exception("Collection bağlantısı kurulamadı.")
+        
+        # Şirket isimlerini liste olarak döndür
+        companies = collection.find({}, {"_id": 0, "name": 1})
+        return [company["name"] for company in companies]
+    except Exception as e:
+        print(f"Error: {e}")
+        return []

@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from backend.db_connection import create_review  
+from backend.db_connection import create_review, get_companies
 
 lang_dict = {
     'en': {
@@ -86,7 +86,13 @@ def submit_review():
         
         st.markdown(f"<h1>{text['submit_review']}</h1>", unsafe_allow_html=True)
 
-        company_name = st.selectbox(text["company_name"], ["ABC Corp", "XYZ Ltd", "Tech Solutions", "Innovative Labs", "Global Tech"])
+        # Şirket isimlerini veritabanından al
+        company_names = get_companies()
+        if not company_names:
+            st.error("No companies available for review.")
+            return
+
+        company_name = st.selectbox(text["company_name"], company_names)
         rating = st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3)
         review_text = st.text_area(text["detailed_review"], placeholder="Share your internship experience...")
         salary = st.text_input(text["salary"], placeholder="Monthly salary")

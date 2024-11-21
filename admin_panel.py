@@ -4,6 +4,12 @@ from datetime import datetime
 
 def admin_panel():
     st.title("Admin Panel")
+    
+    # Ana sayfaya dönme butonu
+    if st.button("Ana Sayfa"):
+        st.session_state['page'] = 'home'  # Ana sayfaya dön
+        st.experimental_rerun()
+
     tab1, tab2 = st.tabs(["Pending Reviews", "Manage Companies"])
 
     # Pending Reviews Tab
