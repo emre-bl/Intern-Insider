@@ -53,116 +53,168 @@ lang_dict = {
     }
 }
 
-# Language Switch
-def switch_language():
-    current_lang = st.session_state.get('language', 'en')
-    new_lang = 'tr' if current_lang == 'en' else 'en'
-    st.session_state['language'] = new_lang
-    st.experimental_rerun()
 
-def admin_panel():
+def initialize_session_state():
+    """Initialize session state variables"""
     if 'language' not in st.session_state:
         st.session_state['language'] = 'en'
+    if 'current_review_index' not in st.session_state:
+        st.session_state.current_review_index = 0
+    if 'pending_reviews' not in st.session_state:
+        st.session_state.pending_reviews = []
+    if 'companies' not in st.session_state:
+        st.session_state.companies = []
+    if 'last_refresh' not in st.session_state:
+        st.session_state.last_refresh = datetime.now()
 
+
+def switch_language():
+    """Switch between languages"""
+    st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
+
+@st.cache(ttl=10)  
+def fetch_pending_reviews():
+    """Fetch pending reviews from database"""
+    reviews_collection = connect_to_collection('reviews')
+    if reviews_collection is not None:
+        return list(reviews_collection.find({"admin_approved": False}))
+    return []
+
+@st.cache(ttl=10)  
+def fetch_companies():
+    """Fetch companies from database"""
+    companies_collection = connect_to_collection('company')
+    if companies_collection is not None:
+        return list(companies_collection.find())
+    return []
+
+def handle_review_action(review_id, action, reviews_collection):
+    """Handle review approval or rejection"""
+    if action == 'approve':
+        reviews_collection.update_one(
+            {"_id": review_id},
+            {"$set": {"admin_approved": True}}
+        )
+    else:  # reject
+        reviews_collection.delete_one({"_id": review_id})
+    
+    st.session_state.current_review_index += 1
+    # Force refresh of cached reviews
+    st.session_state.last_refresh = datetime.now()
+
+def display_pending_reviews(text):
+    """Display and handle pending reviews"""
+    reviews_collection = connect_to_collection('reviews')
+    if reviews_collection is None:
+        st.error("Could not connect to the reviews collection.")
+        return
+
+    # Fetch reviews only if needed
+    if datetime.now().timestamp() - st.session_state.last_refresh.timestamp() > 10:
+        pending_reviews = fetch_pending_reviews()
+        st.session_state.pending_reviews = pending_reviews
+    else:
+        pending_reviews = st.session_state.pending_reviews
+
+    if not pending_reviews:
+        st.write(text["no_pending_reviews"])
+        return
+
+    current_index = st.session_state.current_review_index
+    if current_index >= len(pending_reviews):
+        st.write(text["no_more_reviews"])
+        return
+
+    review = pending_reviews[current_index]
+    
+    with st.container():
+        st.write(f"**{text['company_name']}:** {review.get('company_name')}")
+        st.write(f"**{text['position']}:** {review.get('internship_role')}")
+        st.write(f"**{text['submission_date']}:** {review.get('feedback_date')}")
+        st.write(f"**{text['review_text']}:** {review.get('review_text')}")
+
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button(text["approve_button"], key=f"approve_{current_index}"):
+                handle_review_action(review['_id'], 'approve', reviews_collection)
+                st.experimental_rerun()
+
+        with col2:
+            if st.button(text["reject_button"], key=f"reject_{current_index}"):
+                handle_review_action(review['_id'], 'reject', reviews_collection)
+                st.experimental_rerun()
+
+def handle_company_management(text):
+    """Handle company addition and removal"""
+    companies_collection = connect_to_collection('company')
+    if companies_collection is None:
+        st.error("Could not connect to the companies collection.")
+        return
+
+    # Add Company Form
+    with st.form("add_company_form", clear_on_submit=True):
+        st.markdown(f"### {text['add_company']}")
+        company_data = {
+            "name": st.text_input(text["company_name"]),
+            "industry": st.text_input(text["industry"]),
+            "location": st.text_input(text["location"]),
+        }
+        
+        if st.form_submit_button(text["submit_button"]):
+            company_data["created_at"] = datetime.now()
+            companies_collection.insert_one(company_data)
+            st.success(text["success_add"])
+            st.session_state.last_refresh = datetime.now()
+            st.experimental_rerun()
+
+    # Remove Company Section
+    st.markdown(f"### {text['remove_company']}")
+    companies = fetch_companies()
+    
+    if companies:
+        company_names = {str(company['_id']): company['name'] for company in companies}
+        selected_company_id = st.selectbox(
+            text["select_company_to_remove"],
+            options=company_names.keys(),
+            format_func=lambda x: company_names[x]
+        )
+        
+        if st.button(text["remove_company"]):
+            companies_collection.delete_one({"_id": ObjectId(selected_company_id)})
+            st.success(text["remove_success"].format(company_names[selected_company_id]))
+            st.session_state.last_refresh = datetime.now()
+            st.experimental_rerun()
+    else:
+        st.write(text["no_pending_reviews"])
+
+def admin_panel():
+    """Main admin panel function"""
+    initialize_session_state()
     text = lang_dict[st.session_state['language']]
 
-    # Header Section
+    # Header
     col1, col2 = st.columns([9, 1])
     with col2:
         if st.button("🌐 TR/EN"):
             switch_language()
+            st.experimental_rerun()
 
     st.title(text["title"])
 
-    # Ana sayfaya dönme butonu
     if st.button(text["home_button"]):
         st.session_state['page'] = 'home'
         st.experimental_rerun()
 
+    # Tabs
     tab1, tab2 = st.tabs([text["pending_reviews_tab"], text["manage_companies_tab"]])
 
-    # Pending Reviews Tab
     with tab1:
         st.subheader(text["pending_reviews"])
-        reviews_collection = connect_to_collection('reviews')
-        if reviews_collection is not None:
-            pending_reviews = list(reviews_collection.find({"admin_approved": False}))
+        display_pending_reviews(text)
 
-            if len(pending_reviews) == 0:
-                st.write(text["no_pending_reviews"])
-            else:
-                if "current_review_index" not in st.session_state:
-                    st.session_state.current_review_index = 0
-
-                current_index = st.session_state.current_review_index
-                if current_index < len(pending_reviews):
-                    review = pending_reviews[current_index]
-                    company_name = review.get('company_name', text["company_name"])
-                    position = review.get('position', text["position"])
-                    submission_date = review.get('submission_date', text["submission_date"])
-                    review_text = review.get('review_text', text["review_text"])
-
-                    st.write(f"**{text['company_name']}:** {company_name}")
-                    st.write(f"**{text['position']}:** {position}")
-                    st.write(f"**{text['submission_date']}:** {submission_date}")
-                    st.write(f"**{text['review_text']}:** {review_text}")
-
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        if st.button(text["approve_button"]):
-                            reviews_collection.update_one(
-                                {"_id": review['_id']}, {"$set": {"admin_approved": True}}
-                            )
-                            st.session_state.current_review_index += 1
-                            st.experimental_rerun()
-
-                    with col2:
-                        if st.button(text["reject_button"]):
-                            reviews_collection.delete_one({"_id": review['_id']})
-                            st.session_state.current_review_index += 1
-                            st.experimental_rerun()
-                else:
-                    st.write(text["no_more_reviews"])
-        else:
-            st.error("Could not connect to the reviews collection.")
-
-    # Manage Companies Tab
     with tab2:
         st.subheader(text["manage_companies_tab"])
-        companies_collection = connect_to_collection('company')
+        handle_company_management(text)
 
-        if companies_collection is not None:
-            # Add Company Section
-            st.markdown(f"### {text['add_company']}")
-            with st.form("add_company_form"):
-                company_name = st.text_input(text["company_name"])
-                industry = st.text_input(text["industry"])
-                location = st.text_input(text["location"])
-                submitted = st.form_submit_button(text["submit_button"])
-                if submitted:
-                    new_company = {
-                        "name": company_name,
-                        "industry": industry,
-                        "location": location,
-                        "created_at": datetime.now()
-                    }
-                    companies_collection.insert_one(new_company)
-                    st.success(text["success_add"])
-                    st.experimental_rerun()
-
-            # Remove Company Section
-            st.markdown(f"### {text['remove_company']}")
-            existing_companies = list(companies_collection.find())
-            if existing_companies:
-                company_names = {str(company['_id']): company['name'] for company in existing_companies}
-                selected_company_id = st.selectbox(
-                    text["select_company_to_remove"], options=company_names.keys(), format_func=lambda x: company_names[x]
-                )
-                if st.button(text["remove_company"]):
-                    companies_collection.delete_one({"_id": ObjectId(selected_company_id)})
-                    st.success(text["remove_success"].format(company_names[selected_company_id]))
-                    st.experimental_rerun()
-            else:
-                st.write(text["no_pending_reviews"])
-        else:
-            st.error("Could not connect to the companies collection.")
+if __name__ == "__main__":
+    admin_panel()
