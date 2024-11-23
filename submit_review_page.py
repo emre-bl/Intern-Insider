@@ -45,114 +45,114 @@ lang_dict = {
     }
 }
 
-def switch_language():
-    current_lang = st.session_state.get('language', 'en')
-    new_lang = 'tr' if current_lang == 'en' else 'en'
-    st.session_state['language'] = new_lang
-    st.session_state['language_changed'] = True  # Dil değişti flag'ini ekleyin
+@st.cache  # Eski versiyonlar için cache decorator'ı
+def get_cached_companies():
+    """Şirket listesini cache'le"""
+    return get_companies()
 
-def submit_review():
+def initialize_session_state():
+    """Session state değişkenlerini başlat"""
     if 'page' not in st.session_state:
-        st.session_state['page'] = 'home'  # Varsayılan sayfa
+        st.session_state['page'] = 'home'
+    if 'language' not in st.session_state:
+        st.session_state['language'] = 'en'
+    if 'form_submitted' not in st.session_state:
+        st.session_state['form_submitted'] = False
+
+def switch_language():
+    """Dil değiştirme fonksiyonu"""
+    st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
+
+
+def create_layout():
+    """Sayfa düzenini oluştur"""
+    col1, col2 = st.columns([9, 1])
+    with col2:
+        if st.button('🌐 TR/EN'):
+            switch_language()
+            st.experimental_rerun()
+    return col1
+
+def display_home_page():
+    """Ana sayfa görüntüleme"""
+    st.title("Home Page")
+    st.write("Welcome to the internship review platform!")
+    if st.button("Go to Submit Review"):
+        st.session_state['page'] = 'submit_review'
+        st.experimental_rerun()
+
+def handle_form_submission(form_data, text):
+    """Form gönderme işlemini yönet"""
+    review_data = {
+        "company_name": form_data.get('company_name', ''),
+        "review_text": form_data.get('review_text', ''),
+        "rating": form_data.get('rating', 3),
+        "salary_info": form_data.get('salary', text["not_provided"]),
+        "department": form_data.get('department', ''),
+        "internship_role": form_data.get('internship_role', ''),
+        "project_rating": form_data.get('project_quality', 1),
+        "transportation_info": form_data.get('transportation', False),
+        "remote_work_option": form_data.get('remote_work', False),
+        "meal_card": form_data.get('meal_allowance', False),
+        "technologies_used": form_data.get('technologies_used', '').split(", "),
+        "feedback_date": datetime.now().strftime("%d/%m/%Y"),
+        "like_count": 0,
+        "admin_approved": False
+    }
     
-    if st.session_state['page'] == 'home':
-        st.title("Home Page")
-        st.write("Welcome to the internship review platform!")
+    review_id = create_review(review_data)
+    return review_id is not None
 
-        # Ana sayfada "Go to Submit Review" butonu
-        if st.button("Go to Submit Review"):
-            st.session_state['page'] = 'submit_review'  # Sayfayı değiştirme
-            st.experimental_rerun()  # Sayfayı yeniden yükle
+def display_review_form():
+    """İnceleme formunu görüntüle"""
+    text = lang_dict[st.session_state['language']]
+    col1 = create_layout()
+    
+    companies = get_cached_companies()
+    if not companies:
+        st.error("No companies available for review.")
+        return
 
-    elif st.session_state['page'] == 'submit_review':
-        # Dil seçimi
-        if 'language_changed' not in st.session_state:
-            st.session_state['language_changed'] = False  # Dil değişimi durumu başlatılır
-
-        if st.session_state['language_changed']:
-            st.session_state['language_changed'] = False  # Dil değişimi durumu sıfırlanır
-            st.experimental_rerun()  # Sayfa yenilemesi
-
-        # Dil seçimi butonunu sağ üst köşeye ekleyelim
-        current_lang = st.session_state.get('language', 'en')
-        text = lang_dict[current_lang]
-
-        # Sayfa başlığı ve dil butonunu ekleyelim
-        col1, col2 = st.columns([9, 1])
-        with col2:
-            # Dil değiştir butonu
-            if st.button('🌐 TR/EN'):
-                switch_language()
-        
+    with st.form("review_form", clear_on_submit=True):
         st.markdown(f"<h1>{text['submit_review']}</h1>", unsafe_allow_html=True)
-
-        # Şirket isimlerini veritabanından al
-        company_names = get_companies()
-        if not company_names:
-            st.error("No companies available for review.")
-            return
-
-        company_name = st.selectbox(text["company_name"], company_names)
-        rating = st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3)
-        review_text = st.text_area(text["detailed_review"], placeholder="Share your internship experience...")
-        salary = st.text_input(text["salary"], placeholder="Monthly salary")
-        department = st.selectbox(text["department"], ["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"])
-        internship_role = st.text_input(text["internship_role"], placeholder="e.g., Software Developer Intern")
-        project_quality = st.slider(text["project_quality"], 1, 10)
         
-        # Ek Bilgi - seçenekli kutular
-        st.write(text["additional_info"])
-        transportation = st.checkbox(text["transportation"])
-        remote_work = st.checkbox(text["remote_work"])
-        meal_allowance = st.checkbox(text["meal_allowance"])
-        
-        # Kullanılan teknolojiler (metin alanı)
-        technologies_used = st.text_input(text["technologies_used"], placeholder="e.g., Python, React, Docker")
+        form_data = {
+            'company_name': st.selectbox(text["company_name"], companies),
+            'rating': st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3),
+            'review_text': st.text_area(text["detailed_review"]),
+            'salary': st.text_input(text["salary"]),
+            'department': st.selectbox(text["department"], 
+                                    ["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"]),
+            'internship_role': st.text_input(text["internship_role"]),
+            'project_quality': st.slider(text["project_quality"], 1, 10),
+            'transportation': st.checkbox(text["transportation"]),
+            'remote_work': st.checkbox(text["remote_work"]),
+            'meal_allowance': st.checkbox(text["meal_allowance"]),
+            'technologies_used': st.text_input(text["technologies_used"])
+        }
 
-        # Gönder butonu
-        if st.button(text["submit_button"]):
-            # Veritabanına kaydedilecek inceleme verileri
-            review_data = {
-                "company_name": company_name,
-                "review_text": review_text,
-                "rating": rating,
-                "salary_info": salary if salary else text["not_provided"],
-                "department": department,
-                "internship_role": internship_role,
-                "project_rating": project_quality,
-                "transportation_info": transportation,
-                "remote_work_option": remote_work,
-                "meal_card": meal_allowance,
-                "technologies_used": technologies_used.split(", "),  # Virgülle ayrılmış teknolojiler listesi
-                "feedback_date": datetime.now().strftime("%d/%m/%Y"),
-                "like_count": 0,  
-                "admin_approved": False 
-            }
-
-            # Veriyi veritabanına ekleme
-            review_id = create_review(review_data)
-            if review_id:
+        submitted = st.form_submit_button(text["submit_button"])
+        if submitted:
+            if handle_form_submission(form_data, text):
                 st.success(text["success_message"])
+                st.session_state['form_submitted'] = True
+                st.session_state['page'] = 'home'
+                st.experimental_rerun()
             else:
                 st.error("There was an error saving your review. Please try again.")
-            
-            # Form bilgilerini ekranda gösteriyoruz
-            st.write(text["company_name"] + ":", company_name)
-            st.write(text["overall_rating"] + ":", text["rating_stars"] * rating)
-            st.write(text["detailed_review"] + ":", review_text)
-            st.write(text["salary"] + ":", salary if salary else text["not_provided"])
-            st.write(text["department"] + ":", department)
-            st.write(text["internship_role"] + ":", internship_role)
-            st.write(text["project_quality"] + ":", project_quality)
-            st.write(text["transportation"] + ":", transportation)
-            st.write(text["remote_work"] + ":", remote_work)
-            st.write(text["meal_allowance"] + ":", meal_allowance)
-            st.write(text["technologies_used"] + ":", technologies_used)
 
-        # Ana sayfaya dönme butonu
-        if st.button(text["return_home"]):
-            st.session_state['page'] = 'home'  # Ana sayfaya dön
-            st.experimental_rerun()  # Sayfayı yeniden yükle
+    if st.button(text["return_home"]):
+        st.session_state['page'] = 'home'
+        st.experimental_rerun()
+
+def submit_review():
+    """Ana uygulama fonksiyonu"""
+    initialize_session_state()
+    
+    if st.session_state['page'] == 'home':
+        display_home_page()
+    else:
+        display_review_form()
 
 if __name__ == "__main__":
     submit_review()
