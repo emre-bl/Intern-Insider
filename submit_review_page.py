@@ -45,7 +45,7 @@ lang_dict = {
     }
 }
 
-@st.cache  # Eski versiyonlar için cache decorator'ı
+@st.cache  
 def get_cached_companies():
     """Şirket listesini cache'le"""
     return get_companies()
