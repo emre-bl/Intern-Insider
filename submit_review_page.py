@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 from backend.db_connection import create_review, get_companies
+import time
 
 lang_dict = {
     'en': {
@@ -18,10 +19,13 @@ lang_dict = {
         "meal_allowance": "Meal Allowance",
         "technologies_used": "Technologies Used",
         "submit_button": "Submit Review",
-        "return_home": "Return to Home",
+        "return_home": "Home Page 🏠",
         "success_message": "Your review has been successfully submitted!",
         "not_provided": "Not provided",
-        "rating_stars": "★"
+        "rating_stars": "★",
+        "tech_used_placeholder": "Enter technologies, separated by commas",
+        "warning_message": "You didn't provide a detailed review. Please consider adding more information.",
+        "company_warning_message": "Please select a company before submitting your review."
     },
     'tr': {
         "submit_review": "Staj Değerlendirmesi Gönder",
@@ -33,22 +37,20 @@ lang_dict = {
         "internship_role": "Staj Pozisyonu",
         "project_quality": "Proje Kalitesi Puanı (1-10)",
         "additional_info": "Ek Bilgi",
-        "transportation": "Ulaşım Mevcut",
+        "transportation": "Servis Mevcut",
         "remote_work": "Uzaktan Çalışma Seçeneği",
         "meal_allowance": "Yemek Yardımı",
         "technologies_used": "Kullanılan Teknolojiler",
         "submit_button": "Değerlendirmeyi Gönder",
-        "return_home": "Ana Sayfaya Dön",
+        "return_home": "Ana Sayfa 🏠",
         "success_message": "Değerlendirmeniz başarıyla gönderildi!",
         "not_provided": "Sağlanmadı",
-        "rating_stars": "★"
+        "rating_stars": "★",
+        "tech_used_placeholder": "Kullanılan teknolojileri virgülle ayırarak girin",
+        "warning_message": "Detaylı değerlendirme yapmadınız. Lütfen daha fazla bilgi verin.",
+        "company_warning_message": "Lütfen değerlendirmenizi göndermeden önce bir şirket seçin."
     }
 }
-
-@st.cache  
-def get_cached_companies():
-    """Şirket listesini cache'le"""
-    return get_companies()
 
 def initialize_session_state():
     """Session state değişkenlerini başlat"""
@@ -108,7 +110,7 @@ def display_review_form():
     text = lang_dict[st.session_state['language']]
     col1 = create_layout()
     
-    companies = get_cached_companies()
+    companies = get_companies()
     if not companies:
         st.error("No companies available for review.")
         return
@@ -116,6 +118,8 @@ def display_review_form():
     with st.form("review_form", clear_on_submit=True):
         st.markdown(f"<h1>{text['submit_review']}</h1>", unsafe_allow_html=True)
         
+        companies.insert(0, "Select a company")
+
         form_data = {
             'company_name': st.selectbox(text["company_name"], companies),
             'rating': st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3),
@@ -128,13 +132,22 @@ def display_review_form():
             'transportation': st.checkbox(text["transportation"]),
             'remote_work': st.checkbox(text["remote_work"]),
             'meal_allowance': st.checkbox(text["meal_allowance"]),
-            'technologies_used': st.text_input(text["technologies_used"])
+            'technologies_used': st.text_input(text["technologies_used"], 
+                                               value="",  
+                                                placeholder=text["tech_used_placeholder"])
         }
 
         submitted = st.form_submit_button(text["submit_button"])
         if submitted:
-            if handle_form_submission(form_data, text):
+            if form_data['company_name'] == 'Select a company':
+                st.warning(text['company_warning_message'])
+                submitted = False
+            elif form_data['review_text'] == '':
+                st.warning(text['warning_message'])
+                submitted = False
+            elif handle_form_submission(form_data, text):
                 st.success(text["success_message"])
+                time.sleep(3)  # wait for 3 seconds before redirecting to home page
                 st.session_state['form_submitted'] = True
                 st.session_state['page'] = 'home'
                 st.experimental_rerun()

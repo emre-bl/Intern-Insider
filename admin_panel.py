@@ -7,7 +7,7 @@ from bson import ObjectId
 lang_dict = {
     'en': {
         "title": "Admin Panel",
-        "home_button": "Go to Home",
+        "home_button": "Home Page",
         "pending_reviews_tab": "Pending Reviews",
         "manage_companies_tab": "Manage Companies",
         "add_company": "Add Company",

@@ -28,7 +28,7 @@ def reviews_page():
     with col2:
         rating_filter = st.selectbox("Rating", options=["All Ratings", 5, 4, 3, 2, 1])
     with col3:
-        department_filter = st.text_input("Department")
+        department_filter = st.selectbox("Select Department", options=["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"])
     with col4:
         internship_role_filter = st.text_input("Internship Role")
 
@@ -49,15 +49,13 @@ def reviews_page():
     # MongoDB'den veriyi al ve sırala
     reviews = list(reviews_collection.find(query))
     if sort_option == "Most Liked":
-        reviews = list(reviews_collection.find(query).sort(sort_by)) if sort_by else list(reviews_collection.find(query))
+        reviews = list(reviews_collection.find(query).sort([("like_count", -1)]))
     elif sort_option == "Newest First":
         reviews = sorted(reviews, key=lambda x: datetime.strptime(x['feedback_date'], "%d/%m/%Y"), reverse=True)
     elif sort_option == "Oldest First":
         reviews = sorted(reviews, key=lambda x: datetime.strptime(x['feedback_date'], "%d/%m/%Y"))
 
 
-
-    # İncelemeleri Gösterme
     if reviews:
         for review in reviews:
             st.markdown("---")
@@ -77,6 +75,5 @@ def reviews_page():
     else:
         st.info("Hiç yorum bulunamadı.")
 
-# Fonksiyonu çağır
 if __name__ == "__main__":
     reviews_page()
