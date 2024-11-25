@@ -95,7 +95,9 @@ def render_navbar():
         st.image("assets/intern-insider-compact-logo.svg", width=100)
     
     with col2:
-        st.button(get_text("nav_reviews"), key="reviews_btn")
+        if st.button(get_text("nav_reviews"), key="reviews_btn"):
+            st.session_state.page = "reviews"
+            st.experimental_rerun()
 
     # Şirket Değerlendir butonu
     with col3:
@@ -215,6 +217,9 @@ def main():
     elif st.session_state["page"] == "admin_panel":
         from admin_panel import admin_panel
         admin_panel()
+    elif st.session_state["page"] == "reviews":
+        from Reviews_page import reviews_page
+        reviews_page()
     else:
         init_session_state()
         apply_custom_css()

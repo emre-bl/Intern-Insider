@@ -53,3 +53,4 @@ def get_companies():
     except Exception as e:
         print(f"Error: {e}")
         return []
+
