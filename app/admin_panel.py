@@ -72,7 +72,7 @@ def switch_language():
     """Switch between languages"""
     st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
 
-@st.cache(ttl=10)  
+@st.cache(ttl=100)  
 def fetch_pending_reviews():
     """Fetch pending reviews from database"""
     reviews_collection = connect_to_collection('reviews')
@@ -80,7 +80,7 @@ def fetch_pending_reviews():
         return list(reviews_collection.find({"admin_approved": False}))
     return []
 
-@st.cache(ttl=10)  
+@st.cache(ttl=100)  
 def fetch_companies():
     """Fetch companies from database"""
     companies_collection = connect_to_collection('company')

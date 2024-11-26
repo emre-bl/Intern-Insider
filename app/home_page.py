@@ -1,6 +1,4 @@
 import streamlit as st
-import pandas as pd
-from datetime import datetime
 
 TRANSLATIONS = {
     "en": {
@@ -11,7 +9,7 @@ TRANSLATIONS = {
         "nav_admin_panel": "Admin Panel",
         "submit_review": "Submit Review",
         "hero_title": "Find Your Perfect Internship",
-        "hero_subtitle": "Read real experiences from former interns and make informed decisions about your future internship.",
+        "hero_subtitle": "Read real experiences from former interns!",
         "filter_title": "Quick Search",
         "filter_company": "Company Name",
         "filter_department": "Department",
@@ -27,7 +25,7 @@ TRANSLATIONS = {
         "nav_admin_panel": "Admin Panel",
         "submit_review": "Şirket Değerlendir",
         "hero_title": "Hayalindeki Stajı Bul",
-        "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku ve gelecekteki stajın hakkında bilinçli kararlar al.",
+        "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku!",
         "filter_title": "Hızlı Arama",
         "filter_company": "Şirket Adı",
         "filter_department": "Departman",
@@ -92,7 +90,7 @@ def render_navbar():
     col1, col2, col3, col4, col5, col6 = st.columns([2, 2, 2, 2, 2, 2])
     
     with col1:
-        st.image("assets/intern-insider-compact-logo.svg", width=100)
+        st.image("app/assets/intern-insider-compact-logo.svg", width=100)
     
     with col2:
         if st.button(get_text("nav_reviews"), key="reviews_btn"):
@@ -131,14 +129,14 @@ def render_navbar():
 
 def render_logo():
     """Render the logo at the top of the app"""
-    st.image("assets/intern-insider-logo.png")
+    st.image("app/assets/intern-insider-logo.png")
 
 def render_hero_section():
     """Render hero section"""
     st.markdown(f"""
         <div class="hero-section" style="background-color: #f0f4f8;">
-            <h1 style="color: #ff8c00;">{get_text('hero_title')}</h1>  <!-- Soft turuncu -->
-            <p style="color: #005f73;">{get_text('hero_subtitle')}</p>  <!-- Lacivert ile uyumlu soft mavi -->
+            <h1 style="color: #ff8c00; font-size: 55px;">{get_text('hero_title')}</h1>  <!-- Soft turuncu -->
+            <p style="color: #005f73; font-size: 32px;">{get_text('hero_subtitle')}</p>  <!-- Lacivert ile uyumlu soft mavi -->
         </div>
     """, unsafe_allow_html=True)
 
@@ -209,16 +207,16 @@ def main():
         st.session_state["page"] = "home"
 
     if st.session_state["page"] == "admin_login":
-        from admin_login import admin_login
+        from app.admin_login import admin_login
         admin_login()
     elif st.session_state["page"] == "submit_review":
-        from submit_review_page import submit_review
+        from app.submit_review_page import submit_review
         submit_review()
     elif st.session_state["page"] == "admin_panel":
-        from admin_panel import admin_panel
+        from app.admin_panel import admin_panel
         admin_panel()
     elif st.session_state["page"] == "reviews":
-        from Reviews_page import reviews_page
+        from app.reviews_page import reviews_page
         reviews_page()
     else:
         init_session_state()
@@ -231,3 +229,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
