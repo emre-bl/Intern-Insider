@@ -72,7 +72,7 @@ def switch_language():
     """Switch between languages"""
     st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
 
-@st.cache(ttl=100)  
+@st.cache(ttl=30)  
 def fetch_pending_reviews():
     """Fetch pending reviews from database"""
     reviews_collection = connect_to_collection('reviews')

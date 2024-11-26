@@ -5,7 +5,7 @@ def build_reviews_query(company_filter=None, rating_filter=None,
     """
     Build a dynamic MongoDB query based on provided filters
     """
-    query = {}
+    query = {"admin_approved": True}
     
     if company_filter and company_filter != "All Companies":
         query["company_name"] = company_filter
