@@ -108,10 +108,10 @@ def render_quick_filter():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            company = st.text_input(text["filter_company"], key="quick_company_filter")
+            company = st.text_input(text["company_filter"], key="quick_company_filter")
 
         with col2:
-            department = st.text_input(text["filter_department"], key="quick_department_filter")
+            department = st.text_input(text["department_filter"], key="quick_department_filter")
 
         with col3:
             rating = st.selectbox(
