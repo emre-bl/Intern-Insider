@@ -64,7 +64,25 @@ lang_dict = {
         "already_logged_in": "Admin is already logged in!",
         "filter_rating": "Minimum Rating",
         "popular_reviews": "Most Liked Reviews",
-        "department": "Department"
+        "department": "Departmant",
+        "admin_panel_title": "Admin Panel",
+        "pending_reviews_tab": "Pending Reviews",
+        "manage_companies_tab": "Manage Companies",
+        "add_new_company": "Add New Company",
+        "delete_company": "Delete Company",
+        "company_add_success": "Company added successfully!",
+        "company_delete_success": "Company '{}' deleted successfully!",
+        "no_more_pending_reviews": "No more pending reviews!",
+        "pending_reviews": "Pending Reviews",
+        "no_pending_reviews": "No pending reviews!",
+        "approve_review_button": "Approve Review",
+        "reject_review_button": "Reject Review",
+        "review_text": "Review Text",
+        "submission_date": "Submission Date",
+        "position": "Position",
+        "industry": "Industry",
+        "location": "Location",
+        "remove_company": "Remove Company"
     },
     'tr': {
         "filter_section_title": "Değerlendirmeleri Filtrele",
@@ -128,7 +146,26 @@ lang_dict = {
         "already_logged_in": "Admin halihazırda giriş yapmış!",
         "filter_rating": "Minimum Puan",
         "popular_reviews": "En Çok Beğenilen Değerlendirmeler",
-        "department": "Departman"
+        "department": "Departman",
+        "admin_panel_title": "Admin Paneli",
+        "pending_reviews_tab": "Bekleyen Değerlendirmeler",
+        "manage_companies_tab": "Şirket Yönetimi",
+        "add_new_company": "Yeni Şirket Ekle",
+        "delete_company": "Şirket Sil",
+        "company_add_success": "Şirket başarıyla eklendi!",
+        "company_delete_success": "Şirket '{}' başarıyla silindi!",
+        "no_more_pending_reviews": "Daha fazla bekleyen değerlendirme yok!",
+        "pending_reviews": "Bekleyen Değerlendirmeler",
+        "no_pending_reviews": "Bekleyen değerlendirme yok!",
+        "approve_review_button": "Değerlendirmeyi Onayla",
+        "reject_review_button": "Değerlendirmeyi Reddet",
+        "review_text": "Değerlendirme Metni",
+        "submission_date": "Gönderim Tarihi",
+        "position": "Pozisyon",
+        "industry": "Endüstri",
+        "location": "Konum",
+        "remove_company": "Şirketi Sil"
+        
     }
 }
 
