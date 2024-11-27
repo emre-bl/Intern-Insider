@@ -11,7 +11,7 @@ def render_header():
     col1, col2, col3 = st.columns([8, 1, 1])
     with col2:
         # Home Button
-        if st.button("🏠 " + text["return_home"], key="home_button"):
+        if st.button(text["home_button"], key="home_button"):
             st.session_state['page'] = 'home'
             st.experimental_rerun()
     with col3:

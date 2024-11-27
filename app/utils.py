@@ -52,7 +52,6 @@ lang_dict = {
         "meal_allowance": "Meal Allowance",
         "technologies_used": "Technologies Used",
         "submit_button": "Submit Review",
-        "return_home": "Home",
         "success_message": "Your review has been successfully submitted!",
         "not_provided": "Not provided",
         "tech_used_placeholder": "Enter technologies, separated by commas",
@@ -61,6 +60,15 @@ lang_dict = {
         "popular_reviews": "Most Liked Reviews",
         "no_reviews_available": "No reviews available.",
         "likes": "Likes",
+        "admin_login_title": "Admin Login",
+        "username_label": "Username",
+        "password_label": "Password",
+        "login_button": "Login",
+        "login_success": "Login successful!",
+        "login_failed": "Invalid username or password.",
+        "db_connection_error": "Database connection failed. Please try again later.",
+        "unexpected_error": "An unexpected error occurred",
+        "already_logged_in": "Admin is already logged in!"
     },
     'tr': {
         "filter_section_title": "Değerlendirmeleri Filtrele",
@@ -112,7 +120,6 @@ lang_dict = {
         "meal_allowance": "Yemek Yardımı",
         "technologies_used": "Kullanılan Teknolojiler",
         "submit_button": "Değerlendirmeyi Gönder",
-        "return_home": "Ana Sayfa",
         "success_message": "Değerlendirmeniz başarıyla gönderildi!",
         "not_provided": "Sağlanmadı",
         "tech_used_placeholder": "Kullanılan teknolojileri virgülle ayırarak girin",
@@ -120,7 +127,16 @@ lang_dict = {
         "company_warning_message": "Lütfen değerlendirmenizi göndermeden önce bir şirket seçin.",
         "popular_reviews": "En Beğenilen Değerlendirmeler",
         "no_reviews_available": "Hiç değerlendirme yok.",
-        "likes": "Beğeni"
+        "likes": "Beğeni",
+        "admin_login_title": "Admin Girişi",
+        "username_label": "Kullanıcı Adı",
+        "password_label": "Şifre",
+        "login_button": "Giriş Yap",
+        "login_success": "Giriş başarılı!",
+        "login_failed": "Geçersiz kullanıcı adı veya şifre.",
+        "db_connection_error": "Veritabanı bağlantısı başarısız oldu. Lütfen daha sonra tekrar deneyin.",
+        "unexpected_error": "Beklenmedik bir hata oluştu",
+        "already_logged_in": "Admin halihazırda giriş yapmış!"
     }
 }
 
