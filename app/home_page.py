@@ -1,44 +1,5 @@
 import streamlit as st
-from app.utils import initialize_session_state
-
-TRANSLATIONS = {
-    "en": {
-        "nav_companies": "Companies",
-        "nav_reviews": "Reviews",
-        "nav_admin": "Admin Login",
-        "nav_logout": "Logout",
-        "nav_admin_panel": "Admin Panel",
-        "submit_review": "Submit Review",
-        "hero_title": "Find Your Perfect Internship",
-        "hero_subtitle": "Read real experiences from former interns!",
-        "filter_title": "Quick Search",
-        "filter_company": "Company Name",
-        "filter_department": "Department",
-        "filter_rating": "Minimum Rating",
-        "popular_reviews": "Popular Reviews",
-        "search_button": "Search",
-    },
-    "tr": {
-        "nav_companies": "Şirketler",
-        "nav_reviews": "Değerlendirmeler",
-        "nav_admin": "Admin Girişi",
-        "nav_logout": "Çıkış Yap",
-        "nav_admin_panel": "Admin Panel",
-        "submit_review": "Şirket Değerlendir",
-        "hero_title": "Hayalindeki Stajı Bul",
-        "hero_subtitle": "Eski stajyerlerin gerçek deneyimlerini oku!",
-        "filter_title": "Hızlı Arama",
-        "filter_company": "Şirket Adı",
-        "filter_department": "Departman",
-        "filter_rating": "Minimum Puan",
-        "popular_reviews": "Popüler Değerlendirmeler",
-        "search_button": "Ara",
-    }
-}
-
-def get_text(key: str) -> str:
-    """Get translated text based on current language"""
-    return TRANSLATIONS[st.session_state.language][key]
+from app.utils import initialize_session_state, lang_dict  # Centralized utilities
 
 def apply_custom_css():
     """Apply custom CSS styles"""
@@ -77,89 +38,95 @@ def apply_custom_css():
             border-radius: 5px;
             margin-bottom: 1rem;
         }
+        button[title="View fullscreen"]{
+            visibility: hidden;
+        }
         </style>
     """, unsafe_allow_html=True)
 
 def render_navbar():
+    """Render the navigation bar with centralized language support."""
+    text = lang_dict[st.session_state["language"]]
+
     col1, col2, col3, col4, col5, col6 = st.columns([2, 2, 2, 2, 2, 2])
     
     with col1:
         st.image("app/assets/intern-insider-compact-logo.svg", width=100)
-    
+
     with col2:
-        if st.button(get_text("nav_reviews"), key="reviews_btn"):
-            st.session_state.page = "reviews"
+        if st.button(text["nav_reviews"], key="reviews_btn"):
+            st.session_state["page"] = "reviews"
             st.experimental_rerun()
 
-    # Şirket Değerlendir butonu
     with col3:
-        if st.button(get_text("submit_review"), key="submit_review_btn"):
-            st.session_state.page = "submit_review"
+        if st.button(text["submit_review"], key="submit_review_btn"):
+            st.session_state["page"] = "submit_review"
             st.experimental_rerun()
-    
-    # Dil değiştirme
+
     with col4:
         if st.button("🌐 TR/EN", key="lang_toggle"):
-            st.session_state.language = 'en' if st.session_state.language == 'tr' else 'tr'
+            st.session_state["language"] = "tr" if st.session_state["language"] == "en" else "en"
             st.experimental_rerun()
 
-    # Admin girişi/çıkış işlemleri
     with col5:
         if st.session_state.get("is_admin"):
-            if st.button(get_text("nav_logout"), key="logout_btn"):
-                st.session_state.is_admin = False
+            if st.button(text["nav_logout"], key="logout_btn"):
+                st.session_state["is_admin"] = False
                 st.experimental_rerun()
         else:
-            if st.button(get_text("nav_admin"), key="admin_btn"):
-                st.session_state.page = "admin_login"
+            if st.button(text["nav_admin"], key="admin_btn"):
+                st.session_state["page"] = "admin_login"
                 st.experimental_rerun()
-    
+
     with col6:
         if st.session_state.get("is_admin"):
-            if st.button(get_text("nav_admin_panel"), key="admin_panel_btn"):
-                st.session_state.page = "admin_panel"
+            if st.button(text["nav_admin_panel"], key="admin_panel_btn"):
+                st.session_state["page"] = "admin_panel"
                 st.experimental_rerun()
 
 def render_logo():
-    """Render the logo at the top of the app"""
+    """Render the logo at the top of the app."""
     st.image("app/assets/intern-insider-logo.png")
 
 def render_hero_section():
-    """Render hero section"""
+    """Render hero section with centralized language support."""
+    text = lang_dict[st.session_state["language"]]
     st.markdown(f"""
         <div class="hero-section" style="background-color: #f0f4f8;">
-            <h1 style="color: #ff8c00; font-size: 55px;">{get_text('hero_title')}</h1>  <!-- Soft turuncu -->
-            <p style="color: #005f73; font-size: 32px;">{get_text('hero_subtitle')}</p>  <!-- Lacivert ile uyumlu soft mavi -->
+            <h1 style="color: #ff8c00; font-size: 55px;">{text['hero_title']}</h1> <!-- Soft orange -->
+            <p style="color: #005f73; font-size: 32px;">{text['hero_subtitle']}</p> <!-- Soft blue -->
         </div>
     """, unsafe_allow_html=True)
 
 def render_quick_filter():
-    """Render quick filter section"""
-    st.markdown(f"### {get_text('filter_title')}")
-    
+    """Render quick filter section with centralized language support."""
+    text = lang_dict[st.session_state["language"]]
+    st.markdown(f"### {text['filter_title']}")
+
     with st.form("quick_filter"):
         col1, col2, col3 = st.columns(3)
-        
+
         with col1:
-            company = st.text_input(get_text("filter_company"))
-        
+            company = st.text_input(text["filter_company"])
+
         with col2:
             departments = ["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"]
-            department = st.selectbox(get_text("filter_department"), departments)
-        
+            department = st.selectbox(text["filter_department"], departments)
+
         with col3:
-            rating = st.slider(get_text("filter_rating"), 1, 5, 3)
-        
-        submitted = st.form_submit_button(get_text("search_button"))
+            rating = st.slider(text["filter_rating"], 1, 5, 3)
+
+        submitted = st.form_submit_button(text["search_button"])
         if submitted:
-            # Handle filter submission
-            pass
+            # Handle filter submission logic
+            st.info("Search submitted! (Filter logic to be implemented)")
 
 def render_popular_reviews():
-    """Render popular reviews section"""
-    st.markdown(f"### {get_text('popular_reviews')}")
-    
-    # Sample reviews data - In production, Database'den çekilecek
+    """Render popular reviews section with centralized language support."""
+    text = lang_dict[st.session_state["language"]]
+    st.markdown(f"### {text['popular_reviews']}")
+
+    # Sample reviews data - Replace with actual database queries in production
     sample_reviews = [
         {
             "company": "Tech Corp",
@@ -176,7 +143,7 @@ def render_popular_reviews():
             "date": "2024-03-10"
         }
     ]
-    
+
     for review in sample_reviews:
         with st.container():
             st.markdown(f"""
@@ -188,14 +155,16 @@ def render_popular_reviews():
                 </div>
             """, unsafe_allow_html=True)
 
-def main():
+def home_page():
+    """Home page rendering function."""
+    initialize_session_state()  # Ensure session state is initialized
+    text = lang_dict[st.session_state["language"]]
+
     st.set_page_config(
         page_title="Intern Insider",
         page_icon="👩‍💻",
         layout="wide"
     )
-
-    initialize_session_state()
 
     if st.session_state["page"] == "admin_login":
         from app.admin_login import admin_login
@@ -210,6 +179,7 @@ def main():
         from app.reviews_page import reviews_page
         reviews_page()
     else:
+        # Default to Home Page
         apply_custom_css()
         render_logo()
         render_navbar()
@@ -218,6 +188,4 @@ def main():
         render_popular_reviews()
 
 if __name__ == "__main__":
-    main()
-
-
+    home_page()

@@ -20,7 +20,7 @@ def reviews_page():
             st.experimental_rerun()
 
     # Page title
-    st.markdown(f"# {text['page_title']}")
+    st.markdown(f"# {text['reviews_page_title']}")
 
     # Database connections
     reviews_collection = connect_to_collection('reviews')
