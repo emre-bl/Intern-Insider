@@ -1,4 +1,6 @@
 import streamlit as st
+import random
+from backend.db_connection import connect_to_collection
 from app.utils import initialize_session_state, lang_dict  # Centralized utilities
 
 def apply_custom_css():
@@ -132,36 +134,33 @@ def render_quick_filter():
             st.experimental_rerun()
 
 def render_popular_reviews():
-    """Render popular reviews section with centralized language support."""
+    """Render popular (random) reviews section with data fetched from the database."""
     text = lang_dict[st.session_state["language"]]
     st.markdown(f"### {text['popular_reviews']}")
 
-    # Sample reviews data - Replace with actual database queries in production
-    sample_reviews = [
-        {
-            "company": "Tech Corp",
-            "rating": 4.5,
-            "department": "Computer Engineering",
-            "review": "Great learning experience with modern technologies...",
-            "date": "2024-03-15"
-        },
-        {
-            "company": "Industry Ltd",
-            "rating": 4.8,
-            "department": "Industrial Engineering",
-            "review": "Excellent mentorship program and hands-on projects...",
-            "date": "2024-03-10"
-        }
-    ]
+    # Connect to the reviews collection
+    reviews_collection = connect_to_collection('reviews')
+    if reviews_collection is None:
+        st.error("Could not connect to the database.")
+        return
 
-    for review in sample_reviews:
+    # Fetch all approved reviews and sample three random ones
+    all_reviews = list(reviews_collection.find({"admin_approved": True}))
+    random_reviews = random.sample(all_reviews, min(len(all_reviews), 3))  # Get up to 3 reviews
+
+    if all_reviews is None:
+        st.info(text["no_reviews_available"])  # Add this key to lang_dict
+        return
+
+    # Render each review
+    for review in random_reviews:
         with st.container():
             st.markdown(f"""
                 <div class="review-card">
-                    <h4>{review['company']} - ⭐ {review['rating']}</h4>
+                    <h4>{review['company_name']} - ⭐ {review['rating']}</h4>
                     <p><em>{review['department']}</em></p>
-                    <p>{review['review']}</p>
-                    <small>{review['date']}</small>
+                    <p>{review['review_text']}</p>
+                    <small>{review['feedback_date']}</small>
                 </div>
             """, unsafe_allow_html=True)
 

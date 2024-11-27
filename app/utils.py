@@ -37,7 +37,8 @@ lang_dict = {
         "popular_reviews": "Popular Reviews",
         "search_button": "Search",
         "home_button": "🏠 Home",
-        "reviews_page_title": "Reviews"
+        "reviews_page_title": "Reviews",
+        "no_reviews_available": "No reviews are available at the moment."
     },
     'tr': {
         "filter_section_title": "Değerlendirmeleri Filtrele",
@@ -74,7 +75,8 @@ lang_dict = {
         "popular_reviews": "Popüler Değerlendirmeler",
         "search_button": "Ara",
         "home_button": "🏠 Anasayfa",
-        "reviews_page_title": "Değerlendirmeler"
+        "reviews_page_title": "Değerlendirmeler",
+        "no_reviews_available": "Şu anda mevcut bir değerlendirme yok."
     }
 }
 
