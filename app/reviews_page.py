@@ -9,7 +9,16 @@ def reviews_page():
     """
     Main reviews page rendering function.
     """
-    st.markdown("# Reviews")
+    initialize_session_state()
+    text = lang_dict[st.session_state["language"]]
+
+    # Page title and Home button
+    col1, col2 = st.columns([9, 1])
+    with col2:
+        if st.button(text["home_button"]):
+            st.session_state["page"] = "home"
+            st.experimental_rerun()
+    st.markdown(f"# {text['reviews_page_title']}")
 
     # Database connections
     reviews_collection = connect_to_collection('reviews')
