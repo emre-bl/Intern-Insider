@@ -1,5 +1,4 @@
 import streamlit as st
-import random
 from backend.db_connection import connect_to_collection
 from app.utils import initialize_session_state, lang_dict  # Centralized utilities
 
@@ -134,7 +133,7 @@ def render_quick_filter():
             st.experimental_rerun()
 
 def render_popular_reviews():
-    """Render popular (random) reviews section with data fetched from the database."""
+    """Render the most liked reviews section with data fetched from the database."""
     text = lang_dict[st.session_state["language"]]
     st.markdown(f"### {text['popular_reviews']}")
 
@@ -144,23 +143,26 @@ def render_popular_reviews():
         st.error("Could not connect to the database.")
         return
 
-    # Fetch all approved reviews and sample three random ones
-    all_reviews = list(reviews_collection.find({"admin_approved": True}))
-    random_reviews = random.sample(all_reviews, min(len(all_reviews), 3))  # Get up to 3 reviews
+    # Fetch the top three most liked reviews
+    top_reviews = list(
+        reviews_collection.find({"admin_approved": True})
+        .sort("like_count", -1)  # Sort by like_count in descending order
+        .limit(3)  # Limit to the top 3 reviews
+    )
 
-    if all_reviews is None:
+    if not top_reviews:  # Handle case with no approved reviews
         st.info(text["no_reviews_available"])  # Add this key to lang_dict
         return
 
     # Render each review
-    for review in random_reviews:
+    for review in top_reviews:
         with st.container():
             st.markdown(f"""
                 <div class="review-card">
                     <h4>{review['company_name']} - ⭐ {review['rating']}</h4>
                     <p><em>{review['department']}</em></p>
                     <p>{review['review_text']}</p>
-                    <small>{review['feedback_date']}</small>
+                    <small>{review['feedback_date']} | {text['likes']}: {review.get('like_count', 0)}</small>
                 </div>
             """, unsafe_allow_html=True)
 

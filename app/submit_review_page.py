@@ -1,81 +1,28 @@
 import streamlit as st
 from datetime import datetime
 from backend.db_connection import create_review, get_companies
+from app.utils import initialize_session_state, lang_dict
 import time
-from app.utils import initialize_session_state
 
-lang_dict = {
-    'en': {
-        "submit_review": "Submit Internship Review",
-        "company_name": "Company Name",
-        "overall_rating": "Overall Rating",
-        "detailed_review": "Detailed Review",
-        "salary": "Salary Information (Optional)",
-        "department": "Department",
-        "internship_role": "Internship Role",
-        "project_quality": "Project Quality Rating (1-10)",
-        "additional_info": "Additional Information",
-        "transportation": "Transportation Available",
-        "remote_work": "Remote Work Option",
-        "meal_allowance": "Meal Allowance",
-        "technologies_used": "Technologies Used",
-        "submit_button": "Submit Review",
-        "return_home": "Home Page 🏠",
-        "success_message": "Your review has been successfully submitted!",
-        "not_provided": "Not provided",
-        "rating_stars": "★",
-        "tech_used_placeholder": "Enter technologies, separated by commas",
-        "warning_message": "You didn't provide a detailed review. Please consider adding more information.",
-        "company_warning_message": "Please select a company before submitting your review."
-    },
-    'tr': {
-        "submit_review": "Staj Değerlendirmesi Gönder",
-        "company_name": "Şirket Adı",
-        "overall_rating": "Genel Değerlendirme",
-        "detailed_review": "Detaylı Değerlendirme",
-        "salary": "Aylık Maaş Bilgisi (Opsiyonel)",
-        "department": "Departman",
-        "internship_role": "Staj Pozisyonu",
-        "project_quality": "Proje Kalitesi Puanı (1-10)",
-        "additional_info": "Ek Bilgi",
-        "transportation": "Servis Mevcut",
-        "remote_work": "Uzaktan Çalışma Seçeneği",
-        "meal_allowance": "Yemek Yardımı",
-        "technologies_used": "Kullanılan Teknolojiler",
-        "submit_button": "Değerlendirmeyi Gönder",
-        "return_home": "Ana Sayfa 🏠",
-        "success_message": "Değerlendirmeniz başarıyla gönderildi!",
-        "not_provided": "Sağlanmadı",
-        "rating_stars": "★",
-        "tech_used_placeholder": "Kullanılan teknolojileri virgülle ayırarak girin",
-        "warning_message": "Detaylı değerlendirme yapmadınız. Lütfen daha fazla bilgi verin.",
-        "company_warning_message": "Lütfen değerlendirmenizi göndermeden önce bir şirket seçin."
-    }
-}
+def render_header():
+    """Render the header with Home and Language Toggle buttons."""
+    text = lang_dict[st.session_state['language']]
 
-def switch_language():
-    """Dil değiştirme fonksiyonu"""
-    st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
-
-def create_layout():
-    """Sayfa düzenini oluştur"""
-    col1, col2 = st.columns([9, 1])
+    col1, col2, col3 = st.columns([8, 1, 1])
     with col2:
-        if st.button('🌐 TR/EN'):
-            switch_language()
+        # Home Button
+        if st.button("🏠 " + text["return_home"], key="home_button"):
+            st.session_state['page'] = 'home'
             st.experimental_rerun()
-    return col1
+    with col3:
+        # Language Toggle Button
+        if st.button("🌐 TR/EN", key="lang_toggle"):
+            st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
+            st.experimental_rerun()
 
-def display_home_page():
-    """Ana sayfa görüntüleme"""
-    st.title("Home Page")
-    st.write("Welcome to the internship review platform!")
-    if st.button("Go to Submit Review"):
-        st.session_state['page'] = 'submit_review'
-        st.experimental_rerun()
-
-def handle_form_submission(form_data, text):
-    """Form gönderme işlemini yönet"""
+def handle_form_submission(form_data):
+    """Handle form submission logic."""
+    text = lang_dict[st.session_state['language']]
     review_data = {
         "company_name": form_data.get('company_name', ''),
         "review_text": form_data.get('review_text', ''),
@@ -92,25 +39,28 @@ def handle_form_submission(form_data, text):
         "like_count": 0,
         "admin_approved": False
     }
-    
+
+    # Save review to the database
     review_id = create_review(review_data)
     return review_id is not None
 
-def display_review_form():
-    """İnceleme formunu görüntüle"""
+def render_review_form():
+    """Render the form to submit an internship review."""
     text = lang_dict[st.session_state['language']]
-    col1 = create_layout()
-    
+
+    # Fetch company list from the database
     companies = get_companies()
     if not companies:
-        st.error("No companies available for review.")
+        st.error(text["company_warning_message"])
         return
 
-    with st.form("review_form", clear_on_submit=True):
-        st.markdown(f"<h1>{text['submit_review']}</h1>", unsafe_allow_html=True)
-        
-        companies.insert(0, "Select a company")
+    companies.insert(0, text["company_name"])  # Add placeholder for the dropdown
 
+    # Form layout
+    with st.form("review_form", clear_on_submit=True):
+        st.markdown(f"<h1>{text['submit_review_page']}</h1>", unsafe_allow_html=True)
+
+        # Form fields
         form_data = {
             'company_name': st.selectbox(text["company_name"], companies),
             'rating': st.select_slider(text["overall_rating"], options=[1, 2, 3, 4, 5], value=3),
@@ -122,40 +72,39 @@ def display_review_form():
             'transportation': st.checkbox(text["transportation"]),
             'remote_work': st.checkbox(text["remote_work"]),
             'meal_allowance': st.checkbox(text["meal_allowance"]),
-            'technologies_used': st.text_input(text["technologies_used"], 
-                                               value="",  
-                                                placeholder=text["tech_used_placeholder"])
+            'technologies_used': st.text_input(
+                text["technologies_used"], 
+                value="", 
+                placeholder=text["tech_used_placeholder"]
+            )
         }
 
+        # Submit Button
         submitted = st.form_submit_button(text["submit_button"])
         if submitted:
-            if form_data['company_name'] == 'Select a company':
+            # Validation
+            if form_data['company_name'] == text["company_name"]:
                 st.warning(text['company_warning_message'])
-                submitted = False
-            elif form_data['review_text'] == '':
+            elif not form_data['review_text']:
                 st.warning(text['warning_message'])
-                submitted = False
-            elif handle_form_submission(form_data, text):
+            elif handle_form_submission(form_data):
                 st.success(text["success_message"])
-                time.sleep(3)  # wait for 3 seconds before redirecting to home page
-                st.session_state['form_submitted'] = True
+                time.sleep(2)  # Wait before redirecting
                 st.session_state['page'] = 'home'
                 st.experimental_rerun()
             else:
                 st.error("There was an error saving your review. Please try again.")
 
-    if st.button(text["return_home"]):
-        st.session_state['page'] = 'home'
-        st.experimental_rerun()
-
 def submit_review():
-    """Ana uygulama fonksiyonu"""
+    """Main function for the Submit Review page."""
     initialize_session_state()
-    
-    if st.session_state['page'] == 'home':
-        display_home_page()
-    else:
-        display_review_form()
+    text = lang_dict[st.session_state['language']]
+
+    # Render Header
+    render_header()
+
+    # Render Review Form
+    render_review_form()
 
 if __name__ == "__main__":
     submit_review()
