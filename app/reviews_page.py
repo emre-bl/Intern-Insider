@@ -12,12 +12,22 @@ def reviews_page():
     initialize_session_state()
     text = lang_dict[st.session_state["language"]]
 
-    # Page title and Home button
-    col1, col2 = st.columns([9, 1])
+    # Page title, Home button, and Language toggle
+    col1, col2, col3 = st.columns([8, 1, 1])
+
     with col2:
+        # Home button
         if st.button(text["home_button"]):
             st.session_state["page"] = "home"
             st.experimental_rerun()
+
+    with col3:
+        # Language toggle button
+        if st.button("🌐 TR/EN"):
+            st.session_state["language"] = "en" if st.session_state["language"] == "tr" else "tr"
+            st.experimental_rerun()
+
+    # Page title
     st.markdown(f"# {text['reviews_page_title']}")
 
     # Database connections
