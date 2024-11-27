@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime
 from backend.db_connection import create_review, get_companies
 import time
+from app.utils import initialize_session_state
 
 lang_dict = {
     'en': {
@@ -52,19 +53,9 @@ lang_dict = {
     }
 }
 
-def initialize_session_state():
-    """Session state değişkenlerini başlat"""
-    if 'page' not in st.session_state:
-        st.session_state['page'] = 'home'
-    if 'language' not in st.session_state:
-        st.session_state['language'] = 'en'
-    if 'form_submitted' not in st.session_state:
-        st.session_state['form_submitted'] = False
-
 def switch_language():
     """Dil değiştirme fonksiyonu"""
     st.session_state['language'] = 'tr' if st.session_state['language'] == 'en' else 'en'
-
 
 def create_layout():
     """Sayfa düzenini oluştur"""

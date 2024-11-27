@@ -2,6 +2,7 @@ import streamlit as st
 from backend.db_connection import connect_to_collection
 from datetime import datetime
 from bson import ObjectId
+from app.utils import initialize_session_state
 
 # Translations
 lang_dict = {
@@ -52,21 +53,6 @@ lang_dict = {
         "position": "Pozisyon",
     }
 }
-
-
-def initialize_session_state():
-    """Initialize session state variables"""
-    if 'language' not in st.session_state:
-        st.session_state['language'] = 'en'
-    if 'current_review_index' not in st.session_state:
-        st.session_state.current_review_index = 0
-    if 'pending_reviews' not in st.session_state:
-        st.session_state.pending_reviews = []
-    if 'companies' not in st.session_state:
-        st.session_state.companies = []
-    if 'last_refresh' not in st.session_state:
-        st.session_state.last_refresh = datetime.now()
-
 
 def switch_language():
     """Switch between languages"""

@@ -3,11 +3,13 @@ from backend.db_connection import connect_to_collection
 from backend.queries import build_reviews_query, sort_reviews
 from app.components.filters import render_filter_section
 from app.components.review_display import display_reviews
+from app.utils import initialize_session_state
 
 def reviews_page():
     """
     Main reviews page rendering function
     """
+    initialize_session_state()
     st.markdown("# Reviews")
 
     # Database connections

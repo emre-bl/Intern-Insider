@@ -1,4 +1,5 @@
 import streamlit as st
+from app.utils import initialize_session_state
 
 TRANSLATIONS = {
     "en": {
@@ -34,13 +35,6 @@ TRANSLATIONS = {
         "search_button": "Ara",
     }
 }
-
-def init_session_state():
-    """Initialize session state variables"""
-    if 'language' not in st.session_state:
-        st.session_state.language = 'tr'
-    if 'is_admin' not in st.session_state:
-        st.session_state.is_admin = False  # Varsayılan olarak admin giriş yapılmamış
 
 def get_text(key: str) -> str:
     """Get translated text based on current language"""
@@ -126,7 +120,6 @@ def render_navbar():
                 st.session_state.page = "admin_panel"
                 st.experimental_rerun()
 
-
 def render_logo():
     """Render the logo at the top of the app"""
     st.image("app/assets/intern-insider-logo.png")
@@ -139,7 +132,6 @@ def render_hero_section():
             <p style="color: #005f73; font-size: 32px;">{get_text('hero_subtitle')}</p>  <!-- Lacivert ile uyumlu soft mavi -->
         </div>
     """, unsafe_allow_html=True)
-
 
 def render_quick_filter():
     """Render quick filter section"""
@@ -203,8 +195,7 @@ def main():
         layout="wide"
     )
 
-    if "page" not in st.session_state:
-        st.session_state["page"] = "home"
+    initialize_session_state()
 
     if st.session_state["page"] == "admin_login":
         from app.admin_login import admin_login
@@ -219,7 +210,6 @@ def main():
         from app.reviews_page import reviews_page
         reviews_page()
     else:
-        init_session_state()
         apply_custom_css()
         render_logo()
         render_navbar()
