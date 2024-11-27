@@ -1,11 +1,12 @@
 import streamlit as st
 from app.utils import lang_dict  # Centralized language dictionary
 
-def render_filter_section(companies_collection, reviews_collection):
+def render_filter_section(companies_collection, reviews_collection, pre_filled_filters=None):
     """
-    Render filters for reviews page with centralized language support.
+    Render filters for reviews page with optional pre-filled values.
     """
     text = lang_dict[st.session_state['language']]  # Select language-specific text
+    pre_filled_filters = pre_filled_filters or {}
 
     # Fetch companies and create a dropdown list
     companies = companies_collection.find({}, {"_id": 0, "name": 1})
@@ -20,16 +21,23 @@ def render_filter_section(companies_collection, reviews_collection):
 
     # Company Filter
     with col1:
-        company_filter = st.selectbox(text["company_filter"], options=company_list)
+        company_filter = st.selectbox(
+            text["company_filter"],
+            options=company_list,
+            index=company_list.index(pre_filled_filters.get("company_filter", text["all_companies"]))
+            if pre_filled_filters.get("company_filter") in company_list else 0
+        )
 
     # Rating Filter
     with col2:
         rating_filter = st.selectbox(
             text["rating_filter"],
-            options=[text["all_ratings"]] + [5, 4, 3, 2, 1]  # Include "All Ratings" option
+            options=[text["all_ratings"]] + [5, 4, 3, 2, 1],
+            index=[text["all_ratings"]] + [5, 4, 3, 2, 1].index(pre_filled_filters.get("rating_filter", text["all_ratings"]))
+            if pre_filled_filters.get("rating_filter") in [5, 4, 3, 2, 1] else 0
         )
 
-    # Query for dynamic department filter based on selected company and rating
+    # Query for dynamic department filter
     query = {}
     if company_filter != text["all_companies"]:
         query["company_name"] = company_filter
@@ -42,7 +50,12 @@ def render_filter_section(companies_collection, reviews_collection):
 
     # Department Filter
     with col3:
-        department_filter = st.selectbox(text["department_filter"], options=departments)
+        department_filter = st.selectbox(
+            text["department_filter"],
+            options=departments,
+            index=departments.index(pre_filled_filters.get("department_filter", text["all_departments"]))
+            if pre_filled_filters.get("department_filter") in departments else 0
+        )
 
     # Internship Role Filter
     with col4:

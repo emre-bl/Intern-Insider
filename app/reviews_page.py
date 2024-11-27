@@ -7,39 +7,33 @@ from app.utils import initialize_session_state, lang_dict
 
 def reviews_page():
     """
-    Main reviews page rendering function
+    Main reviews page rendering function.
     """
-    # Select the appropriate language dictionary
-    text = lang_dict[st.session_state['language']]
-
-    # Add a home button for navigation
-    col1, col2 = st.columns([9, 1])  # Layout: Button on the far right
-    with col2:
-        if st.button(text["home_button"]):
-            st.session_state["page"] = "home"  # Navigate to home page
-            st.experimental_rerun()
-
-    # Page title
-    st.markdown(f"# {text['reviews_page_title']}")
+    st.markdown("# Reviews")
 
     # Database connections
     reviews_collection = connect_to_collection('reviews')
     companies_collection = connect_to_collection('company')
-
+    
     if reviews_collection is None or companies_collection is None:
-        st.error(text["no_connection_error"])
+        st.error("Database connection failed.")
         return
 
-    # Render filters and get filter options
-    filters = render_filter_section(companies_collection, reviews_collection)
+    # Pre-fill filters from session state if available
+    quick_filters = st.session_state.get("reviews_filters", {})
+    
+    filters = render_filter_section(
+        companies_collection,
+        reviews_collection,
+        pre_filled_filters=quick_filters
+    )
 
     # Build query
     query = build_reviews_query(
         company_filter=filters['company_filter'],
         rating_filter=filters['rating_filter'],
         department_filter=filters['department_filter'],
-        internship_role_filter=filters['internship_role_filter'],
-        all_ratings_placeholder=text["all_ratings"],  # Pass placeholder
+        internship_role_filter=filters['internship_role_filter']
     )
 
     # Fetch and sort reviews

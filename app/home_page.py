@@ -99,7 +99,7 @@ def render_hero_section():
     """, unsafe_allow_html=True)
 
 def render_quick_filter():
-    """Render quick filter section with centralized language support."""
+    """Render quick filter section similar to reviews_page filters."""
     text = lang_dict[st.session_state["language"]]
     st.markdown(f"### {text['filter_title']}")
 
@@ -107,19 +107,29 @@ def render_quick_filter():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            company = st.text_input(text["filter_company"])
+            company = st.text_input(text["filter_company"], key="quick_company_filter")
 
         with col2:
-            departments = ["Computer Engineering", "Industrial Engineering", "Mechanical Engineering"]
-            department = st.selectbox(text["filter_department"], departments)
+            department = st.text_input(text["filter_department"], key="quick_department_filter")
 
         with col3:
-            rating = st.slider(text["filter_rating"], 1, 5, 3)
+            rating = st.selectbox(
+                text["filter_rating"],
+                options=[text["all_ratings"]] + [5, 4, 3, 2, 1],
+                key="quick_rating_filter"
+            )
 
         submitted = st.form_submit_button(text["search_button"])
         if submitted:
-            # Handle filter submission logic
-            st.info("Search submitted! (Filter logic to be implemented)")
+            # Store filters in session state
+            st.session_state["reviews_filters"] = {
+                "company_filter": company,
+                "department_filter": department,
+                "rating_filter": rating
+            }
+            # Redirect to reviews page
+            st.session_state["page"] = "reviews"
+            st.experimental_rerun()
 
 def render_popular_reviews():
     """Render popular reviews section with centralized language support."""
