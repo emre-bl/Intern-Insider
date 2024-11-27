@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from configparser import ConfigParser
 
 config = ConfigParser()
@@ -8,7 +8,7 @@ connection_string = config.get('481-db', 'connection_string')
 
 def connect_to_db():
     try:
-        client = MongoClient(connection_string)
+        client = MongoClient(connection_string, tls=True, tlsAllowInvalidCertificates=False)
         db = client.mydatabase
         return db
     except Exception as e:
