@@ -1,3 +1,6 @@
 
 /481venv
 /481-env
+/app/__pycache__
+/backend/__pycache__
+*.pyc
