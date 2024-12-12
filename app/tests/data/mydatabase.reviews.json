@@ -1,0 +1,1253 @@
+[{
+  "_id": {
+    "$oid": "6740d774acc3a36622038732"
+  },
+  "company_name": "Turkcell",
+  "review_text": "Innovative projects in the telecommunication sector.",
+  "rating": 5,
+  "salary_info": "6000",
+  "department": "Software Development",
+  "internship_role": "Mobile Developer Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Kotlin",
+    "Android Studio",
+    "Firebase"
+  ],
+  "feedback_date": "15/02/2024",
+  "like_count": 11,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038734"
+  },
+  "company_name": "Roketsan",
+  "review_text": "Challenging but rewarding experience in defense.",
+  "rating": 5,
+  "salary_info": "8000",
+  "department": "Mechanical Engineering",
+  "internship_role": "Simulation Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "MATLAB",
+    "Simulink",
+    "ANSYS"
+  ],
+  "feedback_date": "03/04/2024",
+  "like_count": 16,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038725"
+  },
+  "company_name": "Trendyol",
+  "review_text": "Great experience in a fast-paced e-commerce environment.",
+  "rating": 5,
+  "salary_info": "5000",
+  "department": "Software Engineering",
+  "internship_role": "Backend Developer Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "Python",
+    "Django",
+    "PostgreSQL"
+  ],
+  "feedback_date": "11/04/2024",
+  "like_count": 15,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038726"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Supportive team but challenging workload.",
+  "rating": 4,
+  "salary_info": "4000",
+  "department": "Data Analytics",
+  "internship_role": "Data Analyst Intern",
+  "project_rating": 8,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "SQL",
+    "Tableau",
+    "Power BI"
+  ],
+  "feedback_date": "04/01/2024",
+  "like_count": 10,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038728"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Great mentors, learned about cybersecurity.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Cybersecurity",
+  "internship_role": "Security Analyst Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Wireshark",
+    "Kali Linux",
+    "Python"
+  ],
+  "feedback_date": "22/09/2024",
+  "like_count": 12,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038729"
+  },
+  "company_name": "TUSAŞ",
+  "review_text": "Exposure to aviation systems and hands-on projects.",
+  "rating": 5,
+  "salary_info": "7500",
+  "department": "Aerospace Engineering",
+  "internship_role": "Design Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "SolidWorks",
+    "ANSYS",
+    "MATLAB"
+  ],
+  "feedback_date": "30/07/2024",
+  "like_count": 18,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038730"
+  },
+  "company_name": "BİMSA",
+  "review_text": "Collaborative environment with helpful teammates.",
+  "rating": 4,
+  "salary_info": "5000",
+  "department": "Software Development",
+  "internship_role": "Frontend Developer Intern",
+  "project_rating": 8,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "React",
+    "JavaScript",
+    "CSS"
+  ],
+  "feedback_date": "15/02/2024",
+  "like_count": 14,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038733"
+  },
+  "company_name": "Akbank",
+  "review_text": "Good environment but slow-paced projects.",
+  "rating": 3,
+  "salary_info": "4500",
+  "department": "Data Science",
+  "internship_role": "Data Scientist Intern",
+  "project_rating": 6,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Python",
+    "Pandas",
+    "Machine Learning"
+  ],
+  "feedback_date": "03/09/2024",
+  "like_count": 7,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038727"
+  },
+  "company_name": "ASELSAN",
+  "review_text": "Amazing learning experience in defense technologies.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Electrical Engineering",
+  "internship_role": "Embedded Systems Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "C++",
+    "MATLAB",
+    "ARM Cortex"
+  ],
+  "feedback_date": "21/07/2024",
+  "like_count": 20,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038731"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "Learned a lot about telecommunication systems.",
+  "rating": 4,
+  "salary_info": "5500",
+  "department": "Networking",
+  "internship_role": "Network Engineer Intern",
+  "project_rating": 7,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Cisco",
+    "Linux",
+    "Bash"
+  ],
+  "feedback_date": "11/05/2024",
+  "like_count": 8,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038738"
+  },
+  "company_name": "Vakko Teknoloji",
+  "review_text": "Unique mix of fashion and technology insights.",
+  "rating": 4,
+  "salary_info": "4000",
+  "department": "UI/UX Design",
+  "internship_role": "UI/UX Designer Intern",
+  "project_rating": 7,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Figma",
+    "Adobe XD",
+    "CSS"
+  ],
+  "feedback_date": "17/11/2024",
+  "like_count": 12,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038739"
+  },
+  "company_name": "Ziraat Bankası",
+  "review_text": "Excellent training programs for interns.",
+  "rating": 5,
+  "salary_info": "5000",
+  "department": "Cybersecurity",
+  "internship_role": "Cybersecurity Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Splunk",
+    "Wireshark",
+    "Python"
+  ],
+  "feedback_date": "24/08/2024",
+  "like_count": 14,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038736"
+  },
+  "company_name": "İş Bankası",
+  "review_text": "Supportive colleagues but steep learning curve.",
+  "rating": 4,
+  "salary_info": "5500",
+  "department": "Finance",
+  "internship_role": "Finance Analyst Intern",
+  "project_rating": 7,
+  "transportation_info": false,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Excel",
+    "SQL",
+    "Power BI"
+  ],
+  "feedback_date": "08/07/2024",
+  "like_count": 15,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038740"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Hands-on experience in military simulation systems.",
+  "rating": 5,
+  "salary_info": "7500",
+  "department": "Mechanical Engineering",
+  "internship_role": "Simulation Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Simulink",
+    "ANSYS",
+    "MATLAB"
+  ],
+  "feedback_date": "14/12/2024",
+  "like_count": 19,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038743"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "Developed an understanding of fiber optics technologies.",
+  "rating": 4,
+  "salary_info": "5000",
+  "department": "Telecommunications",
+  "internship_role": "Fiber Optics Engineer Intern",
+  "project_rating": 7,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "AutoCAD",
+    "MATLAB",
+    "ArcGIS"
+  ],
+  "feedback_date": "15/08/2024",
+  "like_count": 8,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038737"
+  },
+  "company_name": "KoçSistem",
+  "review_text": "A fantastic environment for technology enthusiasts.",
+  "rating": 5,
+  "salary_info": "6000",
+  "department": "Software Engineering",
+  "internship_role": "DevOps Engineer Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "AWS",
+    "Jenkins",
+    "Kubernetes"
+  ],
+  "feedback_date": "27/02/2024",
+  "like_count": 18,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038741"
+  },
+  "company_name": "Trendyol",
+  "review_text": "Challenging projects in the logistics domain.",
+  "rating": 4,
+  "salary_info": "5500",
+  "department": "Logistics",
+  "internship_role": "Logistics Analyst Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Excel",
+    "SQL",
+    "Power BI"
+  ],
+  "feedback_date": "19/04/2024",
+  "like_count": 16,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038735"
+  },
+  "company_name": "Yapı Kredi",
+  "review_text": "Good exposure to banking operations and technologies.",
+  "rating": 4,
+  "salary_info": "5000",
+  "department": "IT Operations",
+  "internship_role": "System Administrator Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Linux",
+    "Oracle DB",
+    "Docker"
+  ],
+  "feedback_date": "09/06/2024",
+  "like_count": 10,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038742"
+  },
+  "company_name": "Roketsan",
+  "review_text": "Advanced projects in rocket propulsion systems.",
+  "rating": 5,
+  "salary_info": "8000",
+  "department": "Aerospace Engineering",
+  "internship_role": "Propulsion Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "ANSYS",
+    "MATLAB",
+    "SolidWorks"
+  ],
+  "feedback_date": "19/02/2024",
+  "like_count": 21,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038744"
+  },
+  "company_name": "BİMSA",
+  "review_text": "Supportive managers and an innovative work environment.",
+  "rating": 5,
+  "salary_info": "6000",
+  "department": "Cloud Engineering",
+  "internship_role": "Cloud Engineer Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "AWS",
+    "Azure",
+    "Terraform"
+  ],
+  "feedback_date": "21/04/2024",
+  "like_count": 10,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038746"
+  },
+  "company_name": "ASELSAN",
+  "review_text": "Cutting-edge technologies in defense communication systems.",
+  "rating": 5,
+  "salary_info": "9000",
+  "department": "Embedded Systems",
+  "internship_role": "Embedded Systems Developer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "C",
+    "VHDL",
+    "MATLAB"
+  ],
+  "feedback_date": "25/03/2024",
+  "like_count": 25,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038747"
+  },
+  "company_name": "Trendyol",
+  "review_text": "A fast-paced environment in e-commerce innovation.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Data Science",
+  "internship_role": "Data Scientist Intern",
+  "project_rating": 9,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "Python",
+    "TensorFlow",
+    "Tableau"
+  ],
+  "feedback_date": "01/06/2024",
+  "like_count": 17,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038748"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Great exposure to warehouse automation systems.",
+  "rating": 4,
+  "salary_info": "5500",
+  "department": "Automation Engineering",
+  "internship_role": "Automation Engineer Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "PLC",
+    "SCADA",
+    "Python"
+  ],
+  "feedback_date": "07/06/2024",
+  "like_count": 10,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038750"
+  },
+  "company_name": "KoçSistem",
+  "review_text": "Involved in cloud migration projects.",
+  "rating": 4,
+  "salary_info": "6500",
+  "department": "Cloud Solutions",
+  "internship_role": "Cloud Migration Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "AWS",
+    "Azure",
+    "Kubernetes"
+  ],
+  "feedback_date": "07/01/2024",
+  "like_count": 12,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038753"
+  },
+  "company_name": "BİMSA",
+  "review_text": "Engaging projects in digital transformation.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Digital Solutions",
+  "internship_role": "Digital Transformation Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Power BI",
+    "SQL",
+    "SAP"
+  ],
+  "feedback_date": "25/09/2024",
+  "like_count": 9,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038749"
+  },
+  "company_name": "Roketsan",
+  "review_text": "Outstanding mentorship in guidance systems development.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "Electronics Engineering",
+  "internship_role": "Guidance Systems Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "MATLAB",
+    "C++",
+    "LabVIEW"
+  ],
+  "feedback_date": "16/09/2024",
+  "like_count": 20,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038752"
+  },
+  "company_name": "Akbank",
+  "review_text": "Advanced exposure to risk management techniques.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Risk Management",
+  "internship_role": "Risk Analyst Intern",
+  "project_rating": 7,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Excel",
+    "Python",
+    "SQL"
+  ],
+  "feedback_date": "25/10/2024",
+  "like_count": 11,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038754"
+  },
+  "company_name": "Ziraat Bankası",
+  "review_text": "Great team culture and strong mentorship.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Investment Banking",
+  "internship_role": "Investment Banking Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Bloomberg Terminal",
+    "Excel",
+    "SQL"
+  ],
+  "feedback_date": "20/05/2024",
+  "like_count": 13,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038745"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Amazing experience in cyber defense projects.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "Cybersecurity",
+  "internship_role": "Security Analyst Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Splunk",
+    "Python",
+    "Elastic Stack"
+  ],
+  "feedback_date": "10/04/2024",
+  "like_count": 22,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038751"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "Comprehensive training on 5G technologies.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Networking",
+  "internship_role": "Network Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "Cisco Packet Tracer",
+    "Wireshark",
+    "Python"
+  ],
+  "feedback_date": "26/09/2024",
+  "like_count": 14,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038755"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Amazing experience in cyber defense projects.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "Cybersecurity",
+  "internship_role": "Security Analyst Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Splunk",
+    "Python",
+    "Elastic Stack"
+  ],
+  "feedback_date": "22/10/2024",
+  "like_count": 22,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038761"
+  },
+  "company_name": "Ziraat Bankası",
+  "review_text": "Structured learning in financial risk modeling.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Risk Analysis",
+  "internship_role": "Risk Analyst Intern",
+  "project_rating": 7,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Excel",
+    "R",
+    "SQL"
+  ],
+  "feedback_date": "11/05/2024",
+  "like_count": 10,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038759"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "Great mentorship in network optimization.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Telecommunications",
+  "internship_role": "Network Optimization Intern",
+  "project_rating": 9,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "Cisco Packet Tracer",
+    "Python",
+    "Excel"
+  ],
+  "feedback_date": "22/12/2024",
+  "like_count": 15,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038763"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Comprehensive insights into AI applications in defense.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "AI Development",
+  "internship_role": "AI Research Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Python",
+    "TensorFlow",
+    "PyTorch"
+  ],
+  "feedback_date": "22/03/2024",
+  "like_count": 19,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038768"
+  },
+  "company_name": "TUSAŞ",
+  "review_text": "Practical insights into composite materials.",
+  "rating": 5,
+  "salary_info": "9000",
+  "department": "Materials Science",
+  "internship_role": "Materials Scientist Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "SolidWorks",
+    "ANSYS",
+    "MATLAB"
+  ],
+  "feedback_date": "01/06/2024",
+  "like_count": 26,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038769"
+  },
+  "company_name": "KoçSistem",
+  "review_text": "Innovative cloud architecture challenges.",
+  "rating": 4,
+  "salary_info": "6800",
+  "department": "Cloud Architecture",
+  "internship_role": "Cloud Architect Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "AWS",
+    "Kubernetes",
+    "Terraform"
+  ],
+  "feedback_date": "08/07/2024",
+  "like_count": 14,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038758"
+  },
+  "company_name": "TUSAŞ",
+  "review_text": "Hands-on experience with UAV development.",
+  "rating": 5,
+  "salary_info": "9000",
+  "department": "Aerospace Engineering",
+  "internship_role": "UAV Systems Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "ANSYS",
+    "MATLAB",
+    "C++"
+  ],
+  "feedback_date": "20/04/2024",
+  "like_count": 24,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038765"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Efficient solutions in supply chain analytics.",
+  "rating": 4,
+  "salary_info": "5800",
+  "department": "Supply Chain",
+  "internship_role": "Supply Chain Analyst Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "Excel",
+    "Python",
+    "Tableau"
+  ],
+  "feedback_date": "25/05/2024",
+  "like_count": 11,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038766"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "In-depth exposure to optical networks.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Optical Networks",
+  "internship_role": "Network Specialist Intern",
+  "project_rating": 10,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "Cisco",
+    "Python",
+    "Wireshark"
+  ],
+  "feedback_date": "03/06/2024",
+  "like_count": 17,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740db1aacc3a3662203872f"
+  },
+  "company_name": "Trendyol",
+  "review_text": "High-paced e-commerce environment with data analytics challenges.",
+  "rating": 5,
+  "salary_info": "7000",
+  "department": "Business Intelligence",
+  "internship_role": "BI Analyst Intern",
+  "project_rating": 9,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "SQL",
+    "Tableau",
+    "Python"
+  ],
+  "feedback_date": "21/05/2024",
+  "like_count": 16,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038756"
+  },
+  "company_name": "HAVELSAN",
+  "review_text": "Great exposure to simulation and training systems.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "Simulation",
+  "internship_role": "Simulation Engineer Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "C#",
+    "Unity",
+    "MATLAB"
+  ],
+  "feedback_date": "23/03/2024",
+  "like_count": 20,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038757"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Challenging logistics projects with real-world impact.",
+  "rating": 4,
+  "salary_info": "6000",
+  "department": "Logistics",
+  "internship_role": "Logistics Analyst Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "Python",
+    "Excel",
+    "Power BI"
+  ],
+  "feedback_date": "04/11/2024",
+  "like_count": 12,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038760"
+  },
+  "company_name": "KoçSistem",
+  "review_text": "Dynamic team and innovative cloud projects.",
+  "rating": 4,
+  "salary_info": "6500",
+  "department": "DevOps",
+  "internship_role": "DevOps Engineer Intern",
+  "project_rating": 8,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Docker",
+    "Kubernetes",
+    "AWS"
+  ],
+  "feedback_date": "31/10/2024",
+  "like_count": 14,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038762"
+  },
+  "company_name": "Trendyol",
+  "review_text": "Collaborative environment in software development.",
+  "rating": 5,
+  "salary_info": "7500",
+  "department": "Software Engineering",
+  "internship_role": "Frontend Developer Intern",
+  "project_rating": 9,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": true,
+  "technologies_used": [
+    "React",
+    "JavaScript",
+    "HTML/CSS"
+  ],
+  "feedback_date": "20/08/2024",
+  "like_count": 13,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038764"
+  },
+  "company_name": "Roketsan",
+  "review_text": "Cutting-edge projects in propulsion systems.",
+  "rating": 5,
+  "salary_info": "8500",
+  "department": "Mechanical Engineering",
+  "internship_role": "Propulsion Systems Intern",
+  "project_rating": 10,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "ANSYS",
+    "SolidWorks",
+    "MATLAB"
+  ],
+  "feedback_date": "01/06/2024",
+  "like_count": 21,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740d774acc3a36622038767"
+  },
+  "company_name": "BİMSA",
+  "review_text": "Exciting projects in data visualization.",
+  "rating": 5,
+  "salary_info": "6500",
+  "department": "Data Engineering",
+  "internship_role": "Data Visualization Intern",
+  "project_rating": 9,
+  "transportation_info": true,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "Power BI",
+    "Python",
+    "SQL"
+  ],
+  "feedback_date": "23/06/2024",
+  "like_count": 12,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e114acc3a36622038734"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Uzun çalışma saatleri ve fazla iş yükü, gelişim için yeterli alan bırakmadı.",
+  "rating": 1,
+  "salary_info": "1000",
+  "department": "Customer Service",
+  "internship_role": "Support Intern",
+  "project_rating": 1,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "CRM Tools"
+  ],
+  "feedback_date": "15/05/2024",
+  "like_count": 0,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e115acc3a36622038735"
+  },
+  "company_name": "ASELSAN",
+  "review_text": "Proje teslim tarihleri çok sıkışık, stresli bir ortam yaratıyor.",
+  "rating": 2,
+  "salary_info": "3000",
+  "department": "Defense Systems",
+  "internship_role": "Mechanical Engineer Intern",
+  "project_rating": 2,
+  "transportation_info": false,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "AutoCAD",
+    "SolidWorks"
+  ],
+  "feedback_date": "25/08/2024",
+  "like_count": 0,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e116acc3a36622038736"
+  },
+  "company_name": "ASELSAN",
+  "review_text": "Ekipler arası iletişim yetersizdi, rehberlik zayıftı.",
+  "rating": 1,
+  "salary_info": "2000",
+  "department": "Embedded Systems",
+  "internship_role": "Embedded Developer Intern",
+  "project_rating": 1,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "C",
+    "RTOS"
+  ],
+  "feedback_date": "14/09/2024",
+  "like_count": 1,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e111acc3a36622038731"
+  },
+  "company_name": "Trendyol",
+  "review_text": "Şirket içinde iletişim eksiklikleri var, süreçler gereksiz yere uzuyor.",
+  "rating": 2,
+  "salary_info": "Sağlanmadı",
+  "department": "E-commerce",
+  "internship_role": "Marketing Intern",
+  "project_rating": 2,
+  "transportation_info": false,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "Google Analytics",
+    "Excel"
+  ],
+  "feedback_date": "12/07/2024",
+  "like_count": 0,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e112acc3a36622038732"
+  },
+  "company_name": "Trendyol",
+  "review_text": "Yüksek çalışma temposu ve yetersiz mentorluk, stajyerler için zorlayıcıydı.",
+  "rating": 1,
+  "salary_info": "500",
+  "department": "Software Development",
+  "internship_role": "Frontend Developer",
+  "project_rating": 1,
+  "transportation_info": false,
+  "remote_work_option": true,
+  "meal_card": false,
+  "technologies_used": [
+    "React",
+    "JavaScript"
+  ],
+  "feedback_date": "20/07/2024",
+  "like_count": 0,
+  "admin_approved": true
+},
+{
+  "_id": {
+    "$oid": "6740e113acc3a36622038733"
+  },
+  "company_name": "Hepsiburada",
+  "review_text": "Ekip üyeleri arasındaki uyumsuzluk işleri daha karmaşık hale getiriyor.",
+  "rating": 2,
+  "salary_info": "Sağlanmadı",
+  "department": "Logistics",
+  "internship_role": "Operations Intern",
+  "project_rating": 2,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    "SAP",
+    "Excel"
+  ],
+  "feedback_date": "05/06/2024",
+  "like_count": 0,
+  "admin_approved": false
+},
+{
+  "_id": {
+    "$oid": "6744f84021455bf4c936e733"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "",
+  "rating": 3,
+  "salary_info": "",
+  "department": "Computer Engineering",
+  "internship_role": "",
+  "project_rating": 1,
+  "transportation_info": false,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    ""
+  ],
+  "feedback_date": "26/11/2024",
+  "like_count": 0,
+  "admin_approved": false
+},
+{
+  "_id": {
+    "$oid": "6745137833d600bb6a0895da"
+  },
+  "company_name": "ASELSAN",
+  "review_text": "Mentörler çok ilgiliydi ancak çalıştığımız proje staj süresi için çok kısaydı.",
+  "rating": 4,
+  "salary_info": "12000",
+  "department": "Computer Engineering",
+  "internship_role": "Backend Developer",
+  "project_rating": 6,
+  "transportation_info": true,
+  "remote_work_option": false,
+  "meal_card": true,
+  "technologies_used": [
+    "Python",
+    "Flask"
+  ],
+  "feedback_date": "26/11/2024",
+  "like_count": 0,
+  "admin_approved": false
+},
+{
+  "_id": {
+    "$oid": "67477ce5fffc40e464ccbe54"
+  },
+  "company_name": "Türk Telekom",
+  "review_text": "Stajım çok sıkıcı geçti.",
+  "rating": 1,
+  "salary_info": "10",
+  "department": "Ar-Ge",
+  "internship_role": "Stajyer",
+  "project_rating": 1,
+  "transportation_info": false,
+  "remote_work_option": false,
+  "meal_card": false,
+  "technologies_used": [
+    ""
+  ],
+  "feedback_date": "27/11/2024",
+  "like_count": 0,
+  "admin_approved": false
+}]
