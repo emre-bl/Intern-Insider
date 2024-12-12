@@ -1,5 +1,5 @@
 """
-python -m unittest app/components/test_filters.py -v
+python -m unittest app/tests/test_filters.py -v
 
 - Filter section rendering with multilingual support (EN/TR)
 - Company filter dropdown population
