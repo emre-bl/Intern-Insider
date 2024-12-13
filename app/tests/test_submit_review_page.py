@@ -19,6 +19,7 @@ from app.submit_review_page import (
     render_review_form,
 )
 
+
 class TestSubmitReviewPage(unittest.TestCase):
     def setUp(self):
         st.session_state = {"language": "en", "page": "submit_review"}
@@ -27,7 +28,7 @@ class TestSubmitReviewPage(unittest.TestCase):
     @patch("app.submit_review_page.st.button")
     @patch("app.submit_review_page.st.columns")
     def test_render_header(self, mock_columns, mock_button, mock_rerun):
-        
+
         mock_columns.return_value = [MagicMock(), MagicMock(), MagicMock()]
 
         mock_button.side_effect = [True, False]
