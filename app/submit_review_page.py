@@ -10,13 +10,12 @@ def render_header():
     text = lang_dict[st.session_state["language"]]
 
     col1, col2, col3 = st.columns([8, 1, 1])
-    with col2:
-        # Home Button
+    with col2:  # Home Button
         if st.button(text["home_button"], key="home_button"):
             st.session_state["page"] = "home"
             st.experimental_rerun()
-    with col3:
-        # Language Toggle Button
+    with col3:  # Language Toggle Button
+
         if st.button("🌐 TR/EN", key="lang_toggle"):
             st.session_state["language"] = (
                 "tr" if st.session_state["language"] == "en" else "en"
@@ -106,12 +105,7 @@ def render_review_form():
 def submit_review():
     """Main function for the Submit Review page."""
     initialize_session_state()
-    text = lang_dict[st.session_state["language"]]
-
-    # Render Header
     render_header()
-
-    # Render Review Form
     render_review_form()
 
 
